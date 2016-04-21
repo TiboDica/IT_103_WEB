@@ -1,5 +1,4 @@
 <?php
-include("config.php");
 include("functions.php");
 
 
@@ -7,7 +6,7 @@ include("functions.php");
 $qTbUser = "CREATE TABLE IF NOT EXISTS `user` (
    `pseudo` varchar(25) NOT NULL,
    `email` varchar(100) NOT NULL,
-   `credits` int(11),
+   `credits` int(11) NOT NULL,
    `pwd_hash` varchar(255) NOT NULL,
    PRIMARY KEY (`pseudo`)
  ) ENGINE=InnoDB;";
@@ -27,31 +26,24 @@ $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
 
 // sql request for the creation of table "bet"
 $qTbBet = "CREATE TABLE IF NOT EXISTS `bet` (
-  `ref` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(25) NOT NULL,
+  `ref` int(11) NOT NULL AUTO_INCREMENT REFERENCES bet(ref),
+  `pseudo` varchar(25) NOT NULL REFERENCES bet(pseudo),
   `bet_team` varchar(25) NOT NULL,
-  `bet_amount` int(11),
+  `bet_amount` int(11) NOT NULL,
   PRIMARY KEY (`ref`,`pseudo`)
 ) ENGINE=InnoDB;";
 
 
-$connexion_db = connexion_db();
+$db_con = db_con();
 
+echo "Creation of the table user<br />";
+db_query($db_con, $qTbUser);
 
-echo "Creation of the table user";
-mysqli_query($connexion_db, $qTbUser);
-echo mysqli_info($connexion_db);
-echo mysqli_error($connexion_db);
+echo "Creation of the table match<br />";
+db_query($db_con, $qTbMatch);
 
-echo "Creation of the table match";
-mysqli_query($connexion_db, $qTbMatch);
-echo mysqli_info($connexion_db);
-echo mysqli_error($connexion_db);
+echo "Creation of the table bet<br />";
+db_query($db_con, $qTbBet);
 
-echo "Creation of the table bet";
-mysqli_query($connexion_db, $qTbBet);
-echo mysqli_info($connexion_db);
-echo mysqli_error($connexion_db);
-
-mysqli_close($connexion_db);
+mysqli_close($db_con);
 ?>
