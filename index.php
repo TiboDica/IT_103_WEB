@@ -60,7 +60,6 @@
 										<a href="#" class="list-group-item">Handball</a>
 										<a href="#" class="list-group-item">Ice Hockey</a>
 										<a href="#" class="list-group-item">Volley-Ball</a>
-										<a href="#" class="list-group-item">Car-Racing</a>
 										<a href="#" class="list-group-item">Baseball</a>
 										<a href="#" class="list-group-item">Fighting sport</a>
 										<a href="#" class="list-group-item">E-sport</a>

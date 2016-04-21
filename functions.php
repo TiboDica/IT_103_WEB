@@ -7,8 +7,8 @@ function siteTitle() {
 }
 
 // Open a connexion to the database.
-function connexion_db(){
-	return msqli_connect($GLOBAL['dbServ'],$GLOBALS['dbUser'], $GLOBALS['dbPass'], $GLOBALS['dbName']);
+function connexion_db()	{
+	return mysqli_connect($GLOBAL['dbServ'], $GLOBALS['dbUser'], $GLOBALS['dbPass'], $GLOBALS['dbName']);
 }
 
 
