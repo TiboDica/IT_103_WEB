@@ -2,16 +2,10 @@
 	include("functions.php");
 	include("boilerplate.php");
 ?>
-<<<<<<< HEAD
-	<body>
-	
-	</body>
-=======
 <body>
 		<!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-inverse">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -21,7 +15,6 @@
                 </button>
                 <a class="navbar-brand" href="."> <?php echo siteTitle() ?> </a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -32,6 +25,17 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
+                    </li>
+                </ul>
+								<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Sign in</a>
                     </li>
                 </ul>
             </div>
@@ -46,19 +50,19 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p class="lead">Sporting Bets</p>
                 <div class="list-group">
                     <a href="#" class="list-group-item">Football</a>
                     <a href="#" class="list-group-item">Tennis</a>
                     <a href="#" class="list-group-item">Basketball</a>
 										<a href="#" class="list-group-item">Rugby</a>
 										<a href="#" class="list-group-item">Handball</a>
-										<a href="#" class="list-group-item">Hockey sur glace</a>
+										<a href="#" class="list-group-item">Ice Hockey</a>
 										<a href="#" class="list-group-item">Volley-Ball</a>
-										<a href="#" class="list-group-item">Auto-Moto</a>
+										<a href="#" class="list-group-item">Car-Racing</a>
 										<a href="#" class="list-group-item">Baseball</a>
-										<a href="#" class="list-group-item">Sport de combat</a>
-										<a href="#" class="list-group-item">Esport</a>
+										<a href="#" class="list-group-item">Fighting sport</a>
+										<a href="#" class="list-group-item">E-sport</a>
                 </div>
             </div>
 
@@ -246,5 +250,5 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
->>>>>>> origin/edits_alex
+
 </html>
