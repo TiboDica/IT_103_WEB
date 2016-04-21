@@ -2,6 +2,7 @@
 	include("functions.php");
 	include("boilerplate.php");
 ?>
+
 <body>
 		<!-- Navigation -->
     <nav class="navbar navbar-default navbar-inverse">
@@ -35,7 +36,7 @@
                         <a href="#">Create Account</a>
                     </li>
                     <li>
-                        <a href="#">Sign in</a>
+                        <a href="sign_in.php">Sign in</a>
                     </li>
                 </ul>
             </div>
@@ -243,5 +244,4 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-
 </html>
