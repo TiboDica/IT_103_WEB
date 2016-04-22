@@ -17,20 +17,22 @@ $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
   `sport` varchar(25) NOT NULL,
   `team1` varchar(25) NOT NULL,
   `team2` varchar(25) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `odds1` int(3) NOT NULL,
-  `odds2` int(3) NOT NULL,
-  `draw` int(3) NOT NULL,
+  `date` timestamp NOT NULL,
+  `odds1` int(3) NOT NULL,  /*il faut mettre un float */
+  `odds2` int(3) NOT NULL,  /*il faut mettre un float */
+  `draw` int(3) NOT NULL,   /*il faut mettre un float */
   PRIMARY KEY (`ref`)
 ) ENGINE=InnoDB;";
 
 // sql request for the creation of table "bet"
 $qTbBet = "CREATE TABLE IF NOT EXISTS `bet` (
-  `ref` int(11) NOT NULL AUTO_INCREMENT REFERENCES bet(ref),
-  `pseudo` varchar(25) NOT NULL REFERENCES bet(pseudo),
+  `ref` int(11) NOT NULL,
+  `pseudo` varchar(25) NOT NULL,
   `bet_team` varchar(25) NOT NULL,
   `bet_amount` int(11) NOT NULL,
-  PRIMARY KEY (`ref`,`pseudo`)
+  PRIMARY KEY (`ref`,`pseudo`),
+  FOREIGN KEY (`pseudo`) REFERENCES `user`(`pseudo`),
+  FOREIGN KEY (`ref`) REFERENCES `match`(`ref`)
 ) ENGINE=InnoDB;";
 
 

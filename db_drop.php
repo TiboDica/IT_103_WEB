@@ -1,22 +1,22 @@
 <?php
 include("functions.php");
 
-$dpUser = "DROP TABLE user;";
+$dpUser = "DROP TABLE `user`;";
 
-$dpMatch = "DROP TABLE match;";
+$dpMatch = "DROP TABLE `match`;";
 
-$dpBet = "DROP TABLE bet;";
+$dpBet = "DROP TABLE `bet`;";
 
 $db_con = db_con();
 
-// Drop table user (FONCTIONNE BIEN)
+// Drop table bet
+db_query($db_con, $dpBet);
+
+// Drop table user
 db_query($db_con, $dpUser);
 
-// Drop table match (NE MARCHE PAS ÇA ME LES BRISE !!!!)
+// Drop table match
 db_query($db_con, $dpMatch);
-
-// Drop table bet (PAREIL !!!!!)
-db_query($db_con, $dpBet);
 
 mysqli_close($db_con);
 ?>
