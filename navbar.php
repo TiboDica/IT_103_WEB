@@ -31,7 +31,7 @@
                         <a href="#">Create Account</a>
                     </li>
                     <li>
-                        <a href="#">Sign in</a>
+                        <a href="sign_in.php">Sign in</a>
                     </li>
                 </ul>
             </div>
@@ -39,5 +39,3 @@
         </div>
         <!-- /.container -->
     </nav>
-</body>
-</html>
