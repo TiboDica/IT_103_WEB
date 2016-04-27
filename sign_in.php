@@ -19,7 +19,7 @@ elseif (isset($_POST['email']) && isset($_POST['password'])) {
   include("navbar.php");
 
 if ($connect == false) {
-
+?>
 	<form class="form-horizontal" action="sign_in.php" method="post">
   	<div class="form-group">
     	<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
@@ -39,14 +39,14 @@ if ($connect == false) {
     	</div>
   	</div>
 	</form>
+<?php
 	if (isset($pb)){
 		echo $pb;
 	}
 }
-
 else {
-	include (profil.php);
+	include(profil.php);
 }
+?>
 	</body>
 </html>
-?>
