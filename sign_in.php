@@ -1,5 +1,4 @@
 <?php
-echo "ok";
 include("functions.php");
 session_start();
 $connect = false;
@@ -45,7 +44,6 @@ if ($connect == false) {
 	}
 }
 else {
-	include(profil.php);
 }
 ?>
 	</body>
