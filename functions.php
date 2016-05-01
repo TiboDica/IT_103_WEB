@@ -12,9 +12,6 @@ function db_con()	{
 	if(! $con ){
 		echo 'Could not complete db connection<br />';
 	}
-	else{
-		echo 'Connected successfully<br />';
-	}
 	return $con;
 }
 
@@ -43,15 +40,13 @@ function pwd_hash($pwd){
 // Verify email and password submitted
 function auth($email, $pwd) {
 	$db_con = db_con();
-	$db_con = db_con();
-	$stmt1 = mysqli_prepare($db_con, "SELECT email, pwd_hash FROM user WHERE email = ?");
-	mysqli_stmt_bind_param($stmt1, 's', $email);
-	mysqli_stmt_execute($stmt1);
-	$res = mysqli_stmt_get_result($stmt1);
+	$stmt = mysqli_prepare($db_con, "SELECT `email`, `pwd_hash` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_assoc($res);
 	mysqli_free_result($res);
 	mysqli_close($db_con);
-	echo $assoc['pwd_hash'];
 	if($email == $assoc['email']){
 	  if (password_verify($pwd, $assoc['pwd_hash'])){
 	    return true;
@@ -64,5 +59,45 @@ function auth($email, $pwd) {
 	  return false;
 	}
 }
+
+// return pseudo of user when connected
+function pseudo($email){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc['pseudo'];
+}
+
+// return remaining credits of user
+function remaining_credits($email){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc['credits'];
+}
+
+//return list of all current bets
+function list_bets(){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `sport`, `team1`, `team2`, `date`, `odds1`, `odds2`, `draw` FROM `match`");
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
+}
+
+
 
 ?>
