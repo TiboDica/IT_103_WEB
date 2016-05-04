@@ -12,7 +12,7 @@ $qTbUser = "CREATE TABLE IF NOT EXISTS `user` (
    `zip_code` int(11) NOT NULL,
    `city` varchar(50) NOT NULL,
    `country` varchar(50) NOT NULL,
-   `credits` int(11) NULL,
+   `credits` int(11) NOT NULL DEFAULT '0',
    `pwd_hash` varchar(255) NOT NULL,
    PRIMARY KEY (`pseudo`)
  ) ENGINE=InnoDB;";

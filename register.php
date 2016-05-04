@@ -20,7 +20,7 @@ if (isset($_POST['edit'])) {
 		$emailDuplicatedError = 'Warning : An account already exists whith this email address.';
 	} else if ($_POST['pwd1'] != $_POST['pwd2']) {
 		$emailDuplicatedError = NULL;
-		$passwordsDifferentError = 'Warning : The two passwords are not identical.';
+		$passwordsDifferentError = 'Warning : Passwords do not match.';
 	} else {
 		$pwd_hash = pwd_hash($_POST['pwd1']);
 		register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash);
@@ -33,9 +33,9 @@ if (isset($_POST['edit'])) {
 include("boilerplate.php");
 	if ($connect) {
 		include("navbar_connected.php");
+		echo "Your account has been successfully created.";
 	} else {
 		include("navbar_unconnected.php");		
-	} 
 ?>	
 	<div class="container">
 		<form class="form-horizontal" action="register.php" method='post'>
@@ -98,7 +98,7 @@ include("boilerplate.php");
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="street" required placeholder="Enter street numer and name"
 						<?php
-							if (isset($edit)) echo "value=$street>";
+							if (isset($edit)) echo "value=\"$street\">";
 						?>
 					</div>
 				</div>
@@ -129,12 +129,17 @@ include("boilerplate.php");
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<!------- Password ------->
+				<?php
+					if (isset($passwordsDifferentError)) echo "<div class ='col-sm-9'>$passwordsDifferentError</div>";
+				?>
+				<br>
+					
 				<label for="first_name" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" name="pwd1" required title="This field is required"> <!---- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"---->
+					<input type="password" class="form-control" name="pwd1" pattern=".{6,}" placeholder="Valid password must be of 6 characters minimum" required title="Valid password must be of 6 characters minimum">
 				</div>
 			</div>
 
@@ -142,12 +147,9 @@ include("boilerplate.php");
 				<!------- Password (confirm) ------->
 				<label for="first_name" class="col-sm-2 control-label">(confirm) Password</label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" name="pwd2" required title="This field is required">
+					<input type="password" class="form-control" name="pwd2" pattern=".{6,}" placeholder="Valid password must be of 6 characters minimum" required title="Valid password must be of 6 characters minimum">
 				</div>
 			</div>
-			<?php
-				if (isset($passwordsDifferentError)) echo "<label>$passwordsDifferentError</label>";
-			?>
 			
 			<div class="form-group">
 					<input type="hidden" class="form-control" name="edit">
@@ -160,5 +162,8 @@ include("boilerplate.php");
 			</div>
 		</form>
 	</div>
+	<?php
+	}
+	?>
 </body>
 </html>

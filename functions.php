@@ -80,7 +80,7 @@ function isAlreadyRegistered($email) {
 // Register a new user into db
 function register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash) {
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, 'INSERT INTO `user` (name, firstname, pseudo, email, street, zip_code, city, country ,pwd_hash)');
+	$stmt = mysqli_prepare($db_con, 'INSERT INTO `user` (name, firstname, pseudo, email, street, zip_code, city, country ,pwd_hash) VALUES (?,?,?,?,?,?,?,?,?)');
 	mysqli_stmt_bind_param($stmt, 'sssssisss', $name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash);
 	mysqli_stmt_execute($stmt);
 	mysqli_close($db_con);
