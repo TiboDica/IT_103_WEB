@@ -4,7 +4,7 @@ session_start();
 $connect = false;
 $emailDuplicatedError = NULL;
 $passwordsDifferentError = NULL;
-		
+
 if (isset($_POST['edit'])) {
 	$name = $_POST['name'];
 	$firstname = $_POST['firstname'];
@@ -19,7 +19,6 @@ if (isset($_POST['edit'])) {
 	if (isAlreadyRegistered($email)) {
 		$emailDuplicatedError = 'Warning : An account already exists whith this email address.';
 	} else if ($_POST['pwd1'] != $_POST['pwd2']) {
-		$emailDuplicatedError = NULL;
 		$passwordsDifferentError = 'Warning : Passwords do not match.';
 	} else {
 		$pwd_hash = pwd_hash($_POST['pwd1']);
@@ -28,12 +27,14 @@ if (isset($_POST['edit'])) {
 		$connect = true;
 		$_SESSION['email'] = $_POST['email'];
 	}
+} else {
+	session_destroy();
 }
 
 include("boilerplate.php");
 	if ($connect) {
 		include("navbar_connected.php");
-		echo "Your account has been successfully created.";
+		echo "<div>Your account has been successfully created.</div>";
 	} else {
 		include("navbar_unconnected.php");		
 ?>	
