@@ -4,9 +4,15 @@ include("functions.php");
 
 // sql request for the creation of table "user"
 $qTbUser = "CREATE TABLE IF NOT EXISTS `user` (
+   `name` varchar(25) NOT NULL,
+   `firstname` varchar(25) NOT NULL,
    `pseudo` varchar(25) NOT NULL,
    `email` varchar(100) NOT NULL,
-   `credits` int(11) NOT NULL,
+   `street` varchar(100) NOT NULL,
+   `zip_code` int(11) NOT NULL,
+   `city` varchar(50) NOT NULL,
+   `country` varchar(50) NOT NULL,
+   `credits` int(11) NULL,
    `pwd_hash` varchar(255) NOT NULL,
    PRIMARY KEY (`pseudo`)
  ) ENGINE=InnoDB;";

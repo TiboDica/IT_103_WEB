@@ -28,7 +28,7 @@
                         <a href="#">About</a>
                     </li>
                     <li>
-                        <a href="#">Create Account</a>
+                        <a href="register.php">Create Account</a>
                     </li>
                     <li>
                         <a href="sign_in.php">Sign in</a>

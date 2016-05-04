@@ -60,6 +60,32 @@ function auth($email, $pwd) {
 	}
 }
 
+// Verify whether an user with the submitted email is already registered or not
+function isAlreadyRegistered($email) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `email` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	if($assoc == 0) {
+	    return false;
+	} else {
+		return true;
+	}
+}
+
+// Register a new user into db
+function register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, 'INSERT INTO `user` (name, firstname, pseudo, email, street, zip_code, city, country ,pwd_hash)');
+	mysqli_stmt_bind_param($stmt, 'sssssisss', $name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
 // return pseudo of user when connected
 function pseudo($email){
 	$db_con = db_con();
