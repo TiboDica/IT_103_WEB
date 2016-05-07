@@ -18,6 +18,8 @@ if (isset($_GET['deconnecte'])) {
 }
 elseif (isset($_SESSION['connect'])) {
 	$connect = true;
+	header('Location: profil.php');
+	exit();
 }
 
 if ($connect == false) {
@@ -46,8 +48,13 @@ if ($connect == false) {
 	if (isset($pb)){
 		echo $pb;
 	}
+	?>
+	<div class='col-sm-offset-2 col-sm-10'>
+		<a href='register.php' class="link">Create a new account</a>
+	</div>
+<?php
 }
-else {
+/*else {
 	include("navbar_connected.php");
 	?>
 	<div class="jumbotron">
@@ -89,6 +96,7 @@ else {
 	</div>
 <?php
 }
+*/
 ?>
-	</body>
+</body>
 </html>

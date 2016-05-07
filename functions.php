@@ -77,6 +77,23 @@ function isAlreadyRegistered($email) {
 	}
 }
 
+// Verify whether a pseudo is already used or not
+function pseudoIsTaken($pseudo) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE pseudo = ?");
+	mysqli_stmt_bind_param($stmt, 's', $pseudo);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	if($assoc == 0) {
+	    return false;
+	} else {
+		return true;
+	}
+}
+
 // Register a new user into db
 function register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash) {
 	$db_con = db_con();

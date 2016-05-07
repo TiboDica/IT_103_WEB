@@ -2,11 +2,13 @@
 include("functions.php");
 session_start();
 $connect = false;
-$emailDuplicatedError = NULL;
-$passwordsDifferentError = NULL;
+$ErrorEmailDuplicate = NULL;
+$ErrorEmailInvalid = NULL;
+$ErrorPseudoDuplicate = NULL;
+$ErrorPseudoInvalid = NULL;
+$ErrorPwdDifferents = NULL;
+$ErrorPwdLength = NULL;
 $disconnectMsg = NULL;
-
-include("boilerplate.php");
 
 if (isset($_POST['edit'])) {
 		$name = $_POST['name'];
@@ -18,23 +20,35 @@ if (isset($_POST['edit'])) {
 		$city = $_POST['city'];
 		$country = $_POST['country'];
 		$edit = $_POST['edit'];
-
-		if (isAlreadyRegistered($email)) {
-			$emailDuplicatedError = 'Warning : An account already exists whith this email address.';
-		} else if ($_POST['pwd1'] != $_POST['pwd2']) {
-			$passwordsDifferentError = 'Warning : Passwords do not match.';
-		} else {
+		if (!preg_match('#[a-zA-Z0-9]{2,}#', $pseudo))
+			$ErrorPseudoInvalid = 'Valid Pseudo contains at least 2 characters or numbers.';
+		if (pseudoIsTaken($pseudo))
+			$ErrorPseudoDuplicate = 'Warning : This pseudo is already taken.';
+		if (!preg_match('#[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}#', $email))
+			$ErrorEmailInvalid = 'Please a valid email address.';
+		if (isAlreadyRegistered($email))
+			$ErrorEmailDuplicate = 'Warning : An account already exists whith this email address.';
+		if ($_POST['pwd1'] != $_POST['pwd2'])
+			$ErrorPwdDifferents = 'Warning : Passwords do not match.'; 
+		if (strlen($_POST['pwd1']) < 6)
+			$ErrorPwdLength = 'Valid password contains at least 6 characters.';
+		
+		if (!(isset($ErrorPseudoInvalid) or isset($ErrorPseudoDuplicate) or isset($ErrorEmailInvalid) or isset($ErrorEmailDuplicate) or isset($ErrorPwdDifferents) or isset($ErrorPwdLength))) {
 			$pwd_hash = pwd_hash($_POST['pwd1']);
 			register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash);
 			$_SESSION['connect'] = true;
 			$connect = true;
 			$_SESSION['email'] = $_POST['email'];
+			header('Location: profil.php');
+			exit();
 		}
 } elseif (isset($_SESSION['connect'])) {
 	$disconnectMsg = "You have been disconnected.";
 	session_destroy();
 }	
 	
+include("boilerplate.php");
+
 if ($connect) {
 	include("navbar_connected.php");
 	?>
@@ -77,6 +91,10 @@ if ($connect) {
 		
 			<!-- Pseudo -->
 			<div class="form-group">
+				<?php
+					if (isset($ErrorPseudoDuplicate)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrorPseudoDuplicate."</div>";
+					if (isset($ErrorPseudoInvalid)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrorPseudoInvalid."</div>";
+				?>
 				<label for="pseudo" class="control-label col-sm-2">Pseudo</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="pseudo" required pattern="[a-zA-Z0-9]{2,}" title="Valid pseudo contains at least 2 characters or numbers" placeholder="Valid pseudo contains at least 2 characters or numbers"
@@ -90,7 +108,8 @@ if ($connect) {
 			<!-- Email -->		
 			<div class="form-group">
 				<?php
-					if (isset($emailDuplicatedError)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>$emailDuplicatedError</div>";
+					if (isset($ErrorEmailDuplicate)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrorEmailDuplicate."</div>";
+					if (isset($ErrorEmailInvalid)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrorEmailInvalid."</div>";
 				?>
 				<label for="email" class="control-label col-sm-2">Email</label>
 				<div class="col-sm-9">
@@ -148,7 +167,8 @@ if ($connect) {
 			<!-- Password -->
 			<div class="form-group">
 				<?php
-					if (isset($passwordsDifferentError)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>$passwordsDifferentError</div>";
+					if (isset($ErrorPwdDifferents)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrorPwdDifferents."</div>";
+					if (isset($ErrrorPwdLength)) echo "<div class='alert alert-danger col-sm-9 col-sm-offset-2'>".$ErrrorPwdLength."</div>";
 				?>	
 				<label for="first_name" class="control-label col-sm-2">Password</label>
 				<div class="col-sm-9">
@@ -166,7 +186,7 @@ if ($connect) {
 			<!-- Submit -->		
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" formaction='register.php' class="btn btn-default">Sign in</button>
+					<button type="submit" formaction='register.php' class="btn btn-default">Sign up</button>
 				</div>
 			</div>
 			

@@ -25,7 +25,7 @@
                 </ul>
 								<ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="sign_in.php">My profil</a>
+                        <a href="profil.php">My profil</a>
                     </li>
                     <li>
                         <a href="#">Account parameters</a>
