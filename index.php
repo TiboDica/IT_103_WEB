@@ -3,8 +3,9 @@ include("functions.php");
 session_start();
 include("boilerplate.php");
 if (isset($_GET['deconnecte'])) {
-  session_destroy();
-	include("navbar_unconnected.php");
+	session_destroy();
+	header('Location: index.php');
+	exit()
 }
 elseif (isset($_SESSION['connect'])){
 	include("navbar_connected.php");

@@ -6,6 +6,11 @@ if (!isset($_SESSION['connect'])) {
 	exit();
 } else {
 	include("boilerplate.php");
+	if (isset($_GET['deconnecte'])) {
+		session_destroy();
+		header('Location: index.php?deconnecte');
+		exit();
+	}
 	include("navbar_connected.php");
 	?>
 	<div class="jumbotron">
