@@ -129,6 +129,22 @@ function remaining_credits($email){
 	return $assoc['credits'];
 }
 
+// add credits to a user
+function add_credits($email, $credits) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	$stmt = mysqli_prepare($db_con, "UPDATE `user` SET `credits` = ? WHERE `email` = ?");
+	$credits = $credits + $assoc['credits'];
+	mysqli_stmt_bind_param($stmt, 'is', $credits, $email);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
 //return list of all current bets
 function list_bets(){
 	$db_con = db_con();

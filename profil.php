@@ -5,12 +5,15 @@ if (!isset($_SESSION['connect'])) {
 	header('Location: sign_in.php');
 	exit();
 } else {
-	include("boilerplate.php");
 	if (isset($_GET['deconnecte'])) {
 		session_destroy();
 		header('Location: index.php?deconnecte');
 		exit();
 	}
+	if (isset($_POST['add_credits'])) {
+		add_credits($_SESSION['email'], $_POST['add_credits']);
+	}
+	include("boilerplate.php");
 	include("navbar_connected.php");
 	?>
 	<div class="jumbotron">
@@ -24,9 +27,16 @@ if (!isset($_SESSION['connect'])) {
 			echo '$ on your account';
 			?>
 			</p>
-			<p>
-				<a class="btn btn-success btn-sm" role="button" href='#'>Add credits</a>
-			</p>
+			<form class='form-horizontal' action="#" method='post'>
+				<div class=form-group>					
+					<div class="col-sm-2">
+						<input type="number" class="form-control" name="add_credits" placeholder='how much?'>
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" formaction='#' class="btn btn-success">Add credits</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<div class="col-md-12">
