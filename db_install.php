@@ -34,7 +34,7 @@ $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
 $qTbBet = "CREATE TABLE IF NOT EXISTS `bet` (
   `ref` int(11) NOT NULL,
   `pseudo` varchar(25) NOT NULL,
-  `bet_team` varchar(25) NOT NULL,
+  `bet_type` int(2) NOT NULL,
   `bet_amount` int(11) NOT NULL,
   PRIMARY KEY (`ref`,`pseudo`),
   FOREIGN KEY (`pseudo`) REFERENCES `user`(`pseudo`),

@@ -9,13 +9,13 @@ $insert3 = 'insert into `match` values ("1", "Football", "Barcelona", "Real Madr
 
 $insert4 = 'insert into `match` values ("2", "Starcraft 2", "Jaedong", "MMA", "2016-06-14", "2", "3", "3");';
 
-$insert5 = 'insert into `bet` values ("1", "kirimati", "Jaedong", "10");';
+$insert5 = 'insert into `bet` values ("1", "kirimati", "3", "10");';
 
-$insert6 = 'insert into `bet` values ("2", "kirimati", "Barcelona", "5");';
+$insert6 = 'insert into `bet` values ("2", "kirimati", "3", "5");';
 
-$insert7 = 'insert into `bet` values ("1", "DTrump", "Draw", "100");';
+$insert7 = 'insert into `bet` values ("1", "DTrump", "1", "100");';
 
-$insert8 = 'insert into `bet` values ("2", "DTrump", "Draw", "200");';
+$insert8 = 'insert into `bet` values ("2", "DTrump", "2", "200");';
 
 $db_con = db_con();
 
