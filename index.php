@@ -5,7 +5,7 @@ include("boilerplate.php");
 if (isset($_GET['deconnecte'])) {
 	session_destroy();
 	header('Location: index.php');
-	exit()
+	exit;
 }
 elseif (isset($_SESSION['connect'])){
 	include("navbar_connected.php");
