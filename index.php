@@ -83,27 +83,25 @@ else{
                             <div class="caption">
                                 <h4 class="pull-right"><?php echo "$date" ?></h4>
                                 <h4>
-																	<a href="#"><?php echo "$team1 vs $team2" ?></a>
+									<a href="#"><?php echo "$team1 vs $team2" ?></a>
                                 </h4>
                                 <h4><p><?php echo "$sport" ?></p></h4>
-																<h7><p class="pull-right">
-																	<?php echo "draw : $draw" ?>
-																</p>
-																</h7>
-																<h7>
-                                <p class="pull-left">
-																	<?php echo "odds : $team1 $odds1 ; $team2 $odds2" ?>
-                                </p>
-															</h7>
+									<h7>
+										<p class="pull-right">
+											<?php echo "draw : $draw" ?>
+										</p>
+									</h7>
+									<h7>
+		                                <p class="pull-left">
+											<?php echo "odds : $team1 $odds1 ; $team2 $odds2" ?>
+		                                </p>
+									</h7>
                             </div>
                         </div>
                     </div>
-								<?php } ?>
-
+				<?php } ?>
             </div>
-
         </div>
-
     </div>
     <!-- /.container -->
 

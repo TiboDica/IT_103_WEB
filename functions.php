@@ -157,6 +157,36 @@ function list_bets(){
 	return $assoc;
 }
 
+// return all bets and match that user has bet on
+function bets($email) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	$pseudo = $assoc['pseudo'];
+	
+	$stmt2 = mysqli_prepare($db_con, "SELECT * FROM `bet` INNER JOIN `match` ON `bet`.ref = `match`.ref WHERE `bet`.`pseudo` = ?");
+	mysqli_stmt_bind_param($stmt2, 's', $pseudo);
+	mysqli_stmt_execute($stmt2);
+	$res2 = mysqli_stmt_get_result($stmt2);
+	$assoc2 = mysqli_fetch_all($res2, MYSQLI_ASSOC);
+	mysqli_free_result($res2);
+	mysqli_close($db_con);
+	return $assoc2;
+}
 
+//// return a match according to its ref
+//function match($ref) {
+	//$db_con = db_con();
+	//$stmt = mysqli_prepare($db_con, "SELECT * FROM match WHERE ref = ?");
+	//mysqli_stmt_bind_param($stmt, 'i', $ref);
+	//mysqli_stmt_execute($stmt);
+	//$res = mysqli_stmt_get_result($stmt);
+	//$assoc = mysqli_fetch_assoc($res);
+	//return $assoc;
+//}
 
 ?>
