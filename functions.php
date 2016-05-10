@@ -157,7 +157,7 @@ function list_bets(){
 	return $assoc;
 }
 
-// return all bets and match that user has bet on
+// return all bets and match that user betted on
 function bets($email) {
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE email = ?");
@@ -178,15 +178,24 @@ function bets($email) {
 	return $assoc2;
 }
 
-//// return a match according to its ref
-//function match($ref) {
-	//$db_con = db_con();
-	//$stmt = mysqli_prepare($db_con, "SELECT * FROM match WHERE ref = ?");
-	//mysqli_stmt_bind_param($stmt, 'i', $ref);
-	//mysqli_stmt_execute($stmt);
-	//$res = mysqli_stmt_get_result($stmt);
-	//$assoc = mysqli_fetch_assoc($res);
-	//return $assoc;
-//}
+// return the percentage of people that betted on a specific choice
+function percentBet($ref, $type) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT SUM(`bet_amount`) FROM `bet` WHERE `ref` = ?");
+	mysqli_stmt_bind_param($stmt, 'i', $ref);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_row($res);
+	mysqli_free_result($res);
+	
+	$stmt2 = mysqli_prepare($db_con, "SELECT SUM(`bet_amount`) FROM `bet` WHERE `ref` = ? AND `bet_type` = ?");
+	mysqli_stmt_bind_param($stmt2, 'ii', $ref, $type);
+	mysqli_stmt_execute($stmt2);
+	$res2 = mysqli_stmt_get_result($stmt2);
+	$assoc2 = mysqli_fetch_row($res2);
+	mysqli_free_result($res2);
+	$percent = $assoc2[0]/$assoc[0];
+	return $percent;
+}
 
 ?>
