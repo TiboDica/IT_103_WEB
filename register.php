@@ -35,9 +35,7 @@ if (isset($_POST['edit'])) {
 		if (!(isset($ErrorPseudoInvalid) or isset($ErrorPseudoDuplicate) or isset($ErrorEmailInvalid) or isset($ErrorEmailDuplicate) or isset($ErrorPwdDifferents) or isset($ErrorPwdLength))) {
 			$pwd_hash = pwd_hash($_POST['pwd1']);
 			register($name, $firstname, $pseudo, $email, $street, $zip_code, $city, $country, $pwd_hash);
-			$_SESSION['connect'] = true;
-			$_SESSION['email'] = $_POST['email'];
-			header('Location: profil.php');
+			header('Location: sign_in.php?registered');
 			exit();
 		}
 } elseif (isset($_SESSION['connect'])) {

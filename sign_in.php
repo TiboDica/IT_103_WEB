@@ -2,6 +2,11 @@
 require("functions.php");
 session_start();
 $connect = false;
+if (isset($_GET['registered'])) {
+	$_SESSION['registered_msg'] = $_GET['registered'];
+	header('Location: sign_in.php');
+	exit();
+}
 if (isset($_POST['email']) && isset($_POST['password'])) {
   if (auth($_POST['email'], $_POST['password'])) {
 				$_SESSION['connect'] = true;
@@ -25,7 +30,15 @@ require("boilerplate.php");
 
 if ($connect == false) {
 	require("navbar_unconnected.php");
-?>
+	if (isset($_SESSION['registered_msg'])) {
+	?>
+	<div class='alert alert-success col-sm-9 col-sm-offset-2'>
+		<span class='text-center'>You have been successfully registered. Please sign in.</span>
+	</div>
+	<?php 
+	unset($_SESSION['registered_msg']);
+	} 
+	?>
 	<form class="form-horizontal" action="sign_in.php" method="post">
   	<div class="form-group">
     	<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
