@@ -30,7 +30,11 @@ if ($connect == false) {
   	<div class="form-group">
     	<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
     	<div class="col-sm-9">
-	      	<input type="email" class="form-control" name="email">
+	      	<input type="email" class="form-control" name="email"
+	      	<?php
+	      	if (isset($_POST['email'])) echo "value=".$_POST['email'];
+	      	?>
+	      	>
     	</div>
   	</div>
   	<div class="form-group">
