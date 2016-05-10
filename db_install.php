@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+require("functions.php");
 
 
 // sql request for the creation of table "user"

@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+require("functions.php");
 
 $insert1 = 'insert into `user` (name, firstname, pseudo, email, street, zip_code, city, country, credits, pwd_hash) values ("prout", "prenom", "kirimati", "ibalex.salino@gmail.com", "25, rue des lauriers", "33000", "Bdx", "France", "50", "$2y$10$WtH0XO19nJVD0qWTR2/3HujYHYiDh7G09aB6kzNMl3B.U8YTZurju");'; //pwd : 'jesuisunefleur33'
 

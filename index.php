@@ -1,17 +1,17 @@
 <?php
-include("functions.php");
+require("functions.php");
 session_start();
-include("boilerplate.php");
+require("boilerplate.php");
 if (isset($_GET['deconnecte'])) {
 	session_destroy();
 	header('Location: index.php');
 	exit;
 }
 elseif (isset($_SESSION['connect'])){
-	include("navbar_connected.php");
+	require("navbar_connected.php");
 }
 else{
-	include("navbar_unconnected.php");
+	require("navbar_unconnected.php");
 }
 ?>
     <!-- Page Content -->

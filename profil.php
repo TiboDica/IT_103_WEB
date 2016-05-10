@@ -1,5 +1,5 @@
 <?php
-include('functions.php');
+require('functions.php');
 session_start();
 if (!isset($_SESSION['connect'])) {
 	header('Location: sign_in.php');
@@ -17,8 +17,8 @@ if (!isset($_SESSION['connect'])) {
 		add_credits($_SESSION['email'], -$_POST['rm_credits']);
 	}
 	
-	include("boilerplate.php");
-	include("navbar_connected.php");
+	require("boilerplate.php");
+	require("navbar_connected.php");
 	?>
 	<div class="jumbotron">
 		<div class="container">

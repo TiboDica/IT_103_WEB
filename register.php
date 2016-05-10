@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+require("functions.php");
 session_start();
 $ErrorEmailDuplicate = NULL;
 $ErrorEmailInvalid = NULL;
@@ -45,9 +45,9 @@ if (isset($_POST['edit'])) {
 	session_destroy();
 }	
 	
-include("boilerplate.php");
+require("boilerplate.php");
 
-include("navbar_unconnected.php");	
+require("navbar_unconnected.php");	
 ?>	
 <div class="container">
 	<?php

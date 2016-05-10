@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+require("functions.php");
 session_start();
 $connect = false;
 if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -21,10 +21,10 @@ elseif (isset($_SESSION['connect'])) {
 	exit();
 }
 
-include("boilerplate.php");
+require("boilerplate.php");
 
 if ($connect == false) {
-	include("navbar_unconnected.php");
+	require("navbar_unconnected.php");
 ?>
 	<form class="form-horizontal" action="sign_in.php" method="post">
   	<div class="form-group">

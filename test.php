@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+require("functions.php");
 $db_con = db_con();
 $stmt = mysqli_prepare($db_con, "SELECT `sport`, `team1`, `team2`, `date`, `odds1`, `odds2`, `draw` FROM `match`");
 mysqli_stmt_execute($stmt);
