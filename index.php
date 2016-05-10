@@ -1,36 +1,38 @@
 <?php
 require("functions.php");
 session_start();
-require("boilerplate.php");
+if (isset($_GET['cat'])) {
+	// blablablablablabla !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
 if (isset($_GET['deconnecte'])) {
 	session_destroy();
 	header('Location: index.php');
 	exit;
-}
-elseif (isset($_SESSION['connect'])){
+} 
+
+require("boilerplate.php");
+if (isset($_SESSION['connect'])){
 	require("navbar_connected.php");
-}
-else{
+} else{
 	require("navbar_unconnected.php");
 }
 ?>
-    <!-- Page Content -->
     <div class="container">
         <div class="row">
 
             <div class="col-md-3">
                 <p class="lead">Sporting Bets</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Football</a>
-                    <a href="#" class="list-group-item">Tennis</a>
-                    <a href="#" class="list-group-item">Basketball</a>
-										<a href="#" class="list-group-item">Rugby</a>
-										<a href="#" class="list-group-item">Handball</a>
-										<a href="#" class="list-group-item">Ice Hockey</a>
-										<a href="#" class="list-group-item">Volley-Ball</a>
-										<a href="#" class="list-group-item">Baseball</a>
-										<a href="#" class="list-group-item">Fighting sport</a>
-										<a href="#" class="list-group-item">E-sport</a>
+                    <a href="index.php?cat=football" class="list-group-item">Football</a>
+                    <a href="index.php?cat=tennis" class="list-group-item">Tennis</a>
+                    <a href="index.php?cat=basketball" class="list-group-item">Basketball</a>
+					<a href="index.php?cat=rugby" class="list-group-item">Rugby</a>
+					<a href="index.php?cat=handball" class="list-group-item">Handball</a>
+					<a href="index.php?cat=ice_hockey" class="list-group-item">Ice Hockey</a>
+					<a href="index.php?cat=volley-ball" class="list-group-item">Volley-Ball</a>
+					<a href="index.php?cat=baseball" class="list-group-item">Baseball</a>
+					<a href="index.php?cat=fighting" class="list-group-item">Fighting sport</a>
+					<a href="index.php?cat=e_sport" class="list-group-item">E-sport</a>
                 </div>
             </div>
 
@@ -66,9 +68,9 @@ else{
                     </div>
 
                 </div>
-								<?php
-								$bets = list_bets();
-								foreach ($bets as $bet) {
+					<?php
+					$bets = list_bets();
+					foreach ($bets as $bet) {
 									$sport = $bet['sport'];
 									$team1 = $bet['team1'];
 									$team2 = $bet['team2'];
@@ -76,7 +78,7 @@ else{
 									$odds1 = $bet['odds1'];
 									$odds2 = $bet['odds2'];
 									$draw = $bet['draw'];
-								 ?>
+					 ?>
                     <div class="col-md-12">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
@@ -102,30 +104,5 @@ else{
 				<?php } ?>
             </div>
         </div>
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-</html>
+	</div>
+<?php require "footer.php" ?>

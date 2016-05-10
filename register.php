@@ -185,6 +185,5 @@ require("navbar_unconnected.php");
 		
 	</form>
 </div>
-</body>
-</html>
+<?php require "footer.php" ?>
 	

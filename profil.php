@@ -24,13 +24,7 @@ if (!isset($_SESSION['connect'])) {
 		<div class="container">
 			<h1>Welcome <?php echo pseudo($_SESSION['email']) ?>!</h1>
 			<p><?php echo $_SESSION['email'] ?></p>
-			<p>
-			<?php
-			echo 'You have ';
-			echo remaining_credits($_SESSION['email']);
-			echo '$ on your account';
-			?>
-			</p>
+			<p> You have <?php echo remaining_credits($_SESSION['email']); ?> on your account</p>
 			<form class='form-horizontal' action="#" method='post'>
 				<div class=form-group>					
 					<div class="col-sm-2">
@@ -53,6 +47,7 @@ if (!isset($_SESSION['connect'])) {
 			</form>
 		</div>
 	</div>
+	<div class='container'>
 	<?php
 	$bets = bets($_SESSION['email']);
 	foreach ($bets as $bet) { 
@@ -65,15 +60,15 @@ if (!isset($_SESSION['connect'])) {
 					<h4>
 						<a href="#"><?php echo $bet['team1'].' vs '.$bet['team2'] ?></a>
 					</h4>
-					<h4><p><?php echo $bet['sport'] ?></p></h4>
+					<h4>
+						<p><?php echo $bet['sport'] ?></p>
+					</h4>
 				</div>
 				<div class="row">
 			        <div class="col-sm-6 col-sm-offset-3">
 			          <ul class="list-inline">
 			            <li class="list-group-item col-sm-4
-			            <?php
-			            if ($bet['bet_type'] == 1) echo 'active';
-			            ?>
+				            <?php if ($bet['bet_type'] == 1) echo 'active'; ?>
 			            ">
 							<div class='text-center'>
 								<span><?php echo $bet['team1'] ?></span>
@@ -82,19 +77,19 @@ if (!isset($_SESSION['connect'])) {
 							</div>
 							<div class='progress'>
 								<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
-								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 1), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 1), 2)*100);
-								?>
+									<?php 
+									echo "style='width: ".(number_format(percentBet($bet['ref'], 1), 2)*100)."%' "; 
+									echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 1), 2)*100);
+									?>
 								>
 									<span><?php echo (number_format(percentBet($bet['ref'], 1), 2)*100)."%" ?></span>
 								</div>	
 							</div>
 			            </li>
 			            <li class="list-group-item  col-sm-4
-						<?php
-			            if ($bet['bet_type'] == 2) echo 'active';
-			            ?>
+							<?php
+				            if ($bet['bet_type'] == 2) echo 'active';
+				            ?>
 			            ">
 							<div class='text-center'>
 								<span>draw</span>
@@ -103,10 +98,10 @@ if (!isset($_SESSION['connect'])) {
 							</div>
 							<div class='progress'>
 								<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
-								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 2), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 2), 2)*100);
-								?>
+									<?php 
+									echo "style='width: ".(number_format(percentBet($bet['ref'], 2), 2)*100)."%' "; 
+									echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 2), 2)*100);
+									?>
 								>
 									<span><?php echo (number_format(percentBet($bet['ref'], 2), 2)*100)."%" ?></span>
 								</div>	
@@ -114,9 +109,9 @@ if (!isset($_SESSION['connect'])) {
 
 			            </li>
 			            <li class="list-group-item col-sm-4
-						<?php
-			            if ($bet['bet_type'] == 3) echo 'active';
-			            ?>
+							<?php
+				            if ($bet['bet_type'] == 3) echo 'active';
+				            ?>
 			            ">
 							<div class='text-center'>
 								<span><?php echo $bet['team2'] ?></span>
@@ -125,15 +120,14 @@ if (!isset($_SESSION['connect'])) {
 							</div>
 							<div class='progress'>
 								<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0' 
-								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 3), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 3), 2)*100);
-								?>
+									<?php 
+									echo "style='width: ".(number_format(percentBet($bet['ref'], 3), 2)*100)."%' "; 
+									echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 3), 2)*100);
+									?>
 								>
 									<span><?php echo (number_format(percentBet($bet['ref'], 3), 2)*100)."%" ?></span>
 								</div>	
 							</div>
-
 			            </li>
 			          </ul>
 			        </div>
@@ -147,5 +141,5 @@ if (!isset($_SESSION['connect'])) {
 	}
 }
 ?>
-</body>
-</html>
+	</div>
+<?php require "footer.php" ?>
