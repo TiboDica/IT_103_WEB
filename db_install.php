@@ -20,6 +20,7 @@ $qTbUser = "CREATE TABLE IF NOT EXISTS `user` (
 // sql request for the creation of table "match"
 $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
   `ref` int(11) NOT NULL AUTO_INCREMENT,
+  `cat` varchar(25) NOT NULL,
   `sport` varchar(25) NOT NULL,
   `team1` varchar(25) NOT NULL,
   `team2` varchar(25) NOT NULL,

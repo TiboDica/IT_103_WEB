@@ -3,6 +3,7 @@ require("functions.php");
 session_start();
 if (isset($_GET['cat'])) {
 	// blablablablablabla !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// si on veut ne pqs faire du GET on peut stocker dans SESSION et header.... a voir
 }
 if (isset($_GET['deconnecte'])) {
 	session_destroy();
@@ -28,11 +29,11 @@ if (isset($_SESSION['connect'])){
                     <a href="index.php?cat=basketball" class="list-group-item">Basketball</a>
 					<a href="index.php?cat=rugby" class="list-group-item">Rugby</a>
 					<a href="index.php?cat=handball" class="list-group-item">Handball</a>
-					<a href="index.php?cat=ice_hockey" class="list-group-item">Ice Hockey</a>
+					<a href="index.php?cat=ice-hockey" class="list-group-item">Ice Hockey</a>
 					<a href="index.php?cat=volley-ball" class="list-group-item">Volley-Ball</a>
 					<a href="index.php?cat=baseball" class="list-group-item">Baseball</a>
 					<a href="index.php?cat=fighting" class="list-group-item">Fighting sport</a>
-					<a href="index.php?cat=e_sport" class="list-group-item">E-sport</a>
+					<a href="index.php?cat=e-sport" class="list-group-item">E-sport</a>
                 </div>
             </div>
 
@@ -69,7 +70,11 @@ if (isset($_SESSION['connect'])){
 
                 </div>
 					<?php
-					$bets = list_bets();
+					if (isset($_GET['cat'])) {
+						$bets = list_betsCat($_GET['cat']);
+					} else {
+						$bets = list_bets();
+					}
 					foreach ($bets as $bet) {
 									$sport = $bet['sport'];
 									$team1 = $bet['team1'];

@@ -145,7 +145,7 @@ function add_credits($email, $credits) {
 	mysqli_close($db_con);
 }
 
-//return list of all current bets
+// return list of all current bets
 function list_bets(){
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "SELECT `sport`, `team1`, `team2`, `date`, `odds1`, `odds2`, `draw` FROM `match`");
@@ -157,8 +157,21 @@ function list_bets(){
 	return $assoc;
 }
 
+// return list of current bets
+function list_betsCat($cat){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` WHERE `cat` = ?");
+	mysqli_stmt_bind_param($stmt, 's', $cat);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
+}
+
 // return all bets and match that user betted on
-function bets($email) {
+function betsUser($email) {
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE email = ?");
 	mysqli_stmt_bind_param($stmt, 's', $email);
