@@ -49,7 +49,7 @@ if (!isset($_SESSION['connect'])) {
 	</div>
 	<div class='container'>
 	<?php
-	$bets = bets($_SESSION['email']);
+	$bets = betsUser($_SESSION['email']);
 	foreach ($bets as $bet) { 
 	?>	
 		<div class="col-md-12">
