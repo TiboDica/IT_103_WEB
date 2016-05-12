@@ -145,10 +145,10 @@ function add_credits($email, $credits) {
 	mysqli_close($db_con);
 }
 
-// return list of all current bets
+// return list of all current matchs
 function list_bets(){
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT `sport`, `team1`, `team2`, `date`, `odds1`, `odds2`, `draw` FROM `match`");
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match`");
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
@@ -157,7 +157,7 @@ function list_bets(){
 	return $assoc;
 }
 
-// return list of current bets
+// return list of current matchs
 function list_betsCat($cat){
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` WHERE `cat` = ?");
@@ -165,6 +165,19 @@ function list_betsCat($cat){
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
+}
+
+// return a specific match
+function match($ref){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` WHERE `ref` = ?");
+	mysqli_stmt_bind_param($stmt, 'i', $ref);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
 	mysqli_free_result($res);
 	mysqli_close($db_con);
 	return $assoc;
