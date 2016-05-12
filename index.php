@@ -76,6 +76,7 @@ if (isset($_SESSION['connect'])){
 						$bets = list_bets();
 					}
 					foreach ($bets as $bet) {
+									$ref = $bet['ref'];
 									$sport = $bet['sport'];
 									$team1 = $bet['team1'];
 									$team2 = $bet['team2'];
@@ -84,28 +85,91 @@ if (isset($_SESSION['connect'])){
 									$odds2 = $bet['odds2'];
 									$draw = $bet['draw'];
 					 ?>
-                    <div class="col-md-12">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><?php echo "$date" ?></h4>
-                                <h4>
-									<a href="#"><?php echo "$team1 vs $team2" ?></a>
-                                </h4>
-                                <h4><p><?php echo "$sport" ?></p></h4>
-									<h7>
-										<p class="pull-right">
-											<?php echo "draw : $draw" ?>
-										</p>
-									</h7>
-									<h7>
-		                                <p class="pull-left">
-											<?php echo "odds : $team1 $odds1 ; $team2 $odds2" ?>
-		                                </p>
-									</h7>
-                            </div>
-                        </div>
-                    </div>
+									
+						<div class="col-md-12">
+							<div class="thumbnail">
+								<img src="http://placehold.it/320x150" alt="">
+								<div class="caption">
+									<h4 class="pull-right"><?php echo $date ?></h4>					
+									<h4>
+										<a href="#"><?php echo $team1.' vs '.$team2 ?></a>
+									</h4>
+									<h4>
+										<p><?php echo $sport ?></p>
+									</h4>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+											<form class="form-horizontal" action="bet.php" method="post">
+												<div class="form-group"> 
+													<div>
+														<input type="hidden" class="form-control" name="match_ref" value=<?php echo $ref ?>>
+													</div>
+													<div class="col-sm-6 col-sm-offset-3">
+														<button type="submit" class="btn btn-default"> Bet </button>
+													</div>
+												</div>
+											</form>
+										</div>
+							        <div class="col-sm-6 col-sm-offset-1">
+							          <ul class="list-inline">
+							            <li class="list-group-item col-sm-4">
+											<div class='text-center'>
+												<span><?php echo $team1 ?></span>
+												<br>
+												<span><?php echo $odds1 ?></span>
+											</div>
+											<div class='progress'>
+												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
+													<?php 
+													echo "style='width: ".(number_format(percentBet($ref, 1), 2)*100)."%' "; 
+													echo "aria-valuenow=".(number_format(percentBet($ref, 1), 2)*100);
+													?>
+												>
+													<span><?php echo (number_format(percentBet($ref, 1), 2)*100)."%" ?></span>
+												</div>	
+											</div>
+							            </li>
+							            <li class="list-group-item  col-sm-4">
+											<div class='text-center'>
+												<span>draw</span>
+												<br>
+												<span><?php echo $bet['draw'] ?></span>
+											</div>
+											<div class='progress'>
+												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
+													<?php 
+													echo "style='width: ".(number_format(percentBet($ref, 2), 2)*100)."%' "; 
+													echo "aria-valuenow=".(number_format(percentBet($ref, 2), 2)*100);
+													?>
+												>
+													<span><?php echo (number_format(percentBet($ref, 2), 2)*100)."%" ?></span>
+												</div>	
+											</div>
+					
+							            </li>
+							            <li class="list-group-item col-sm-4">
+											<div class='text-center'>
+												<span><?php echo $team2 ?></span>
+												<br>
+												<span><?php echo $odds2 ?></span>
+											</div>
+											<div class='progress'>
+												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0' 
+													<?php 
+													echo "style='width: ".(number_format(percentBet($ref, 3), 2)*100)."%' "; 
+													echo "aria-valuenow=".(number_format(percentBet($ref, 3), 2)*100);
+													?>
+												>
+													<span><?php echo (number_format(percentBet($ref, 3), 2)*100)."%" ?></span>
+												</div>	
+											</div>
+							            </li>
+							          </ul>
+							        </div>
+								</div>
+							</div>
+						</div>
 				<?php } ?>
             </div>
         </div>
