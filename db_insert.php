@@ -5,9 +5,9 @@ $insert1 = 'insert into `user` (name, firstname, pseudo, email, street, zip_code
 
 $insert2 = 'insert into `user` (name, firstname, pseudo, email, street, zip_code, city, country, credits, pwd_hash) values ("Trump", "Donald", "DTrump", "donald.trump@caramail.fr", "33, rue de la soupe", "47589", "TrucMuche", "Luxembourg", "10000", "$2y$10$y8Cw074P2f./tdoDX/9/.uSyXscLQKeez7I/Njmk1g1X6mbMHETiW");'; //pwd : 'ilovemexicansUSA'
 
-$insert3 = 'insert into `match` values ("1", "football", "Football", "Barcelona", "Real Madrid", "2016-08-20", "3", "3", "2");';
+$insert3 = 'insert into `match` values ("1", "football", "Football", "Barcelona", "Real Madrid", "2016-08-20", "1", "1", "1");';
 
-$insert4 = 'insert into `match` values ("2", "e-sport", "Starcraft 2", "Jaedong", "MMA", "2016-06-14", "2", "3", "3");';
+$insert4 = 'insert into `match` values ("2", "e-sport", "Starcraft 2", "Jaedong", "MMA", "2016-06-14", "1", "1", "1");';
 
 $insert5 = 'insert into `bet` values ("1", "kirimati", "3", "10");';
 
@@ -37,4 +37,9 @@ db_query ($db_con, $insert7);
 db_query ($db_con, $insert8);
 
 mysqli_close($db_con);
+
+$bets = list_bets();
+foreach ($bets as $bet) {
+	oddsEvaluation($bet['ref']);
+}
 ?>

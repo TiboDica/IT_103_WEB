@@ -120,13 +120,13 @@ if (isset($_SESSION['connect'])){
 												<span><?php echo $odds1 ?></span>
 											</div>
 											<div class='progress'>
-												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
+												<div class='progress-bar progress-bar-success progress-bar-striped active' aria-valuemax='100' aria-valuemin='0'  
 													<?php 
-													echo "style='width: ".(number_format(percentBet($ref, 1), 2)*100)."%' "; 
-													echo "aria-valuenow=".(number_format(percentBet($ref, 1), 2)*100);
+													echo "style='width: ".(percentBet($ref, 1)*100)."%' "; 
+													echo "aria-valuenow=".(percentBet($ref, 1)*100);
 													?>
 												>
-													<span><?php echo (number_format(percentBet($ref, 1), 2)*100)."%" ?></span>
+													<span><?php echo (percentBet($ref, 1)*100)."%" ?></span>
 												</div>	
 											</div>
 							            </li>
@@ -137,10 +137,10 @@ if (isset($_SESSION['connect'])){
 												<span><?php echo $bet['draw'] ?></span>
 											</div>
 											<div class='progress'>
-												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
+												<div class='progress-bar progress-bar-success progress-bar-striped active' aria-valuemax='100' aria-valuemin='0'  
 													<?php 
-													echo "style='width: ".(number_format(percentBet($ref, 2), 2)*100)."%' "; 
-													echo "aria-valuenow=".(number_format(percentBet($ref, 2), 2)*100);
+													echo "style='width: ".(percentBet($ref, 2)*100)."%' "; 
+													echo "aria-valuenow=".(percentBet($ref, 2)*100);
 													?>
 												>
 													<span><?php echo (number_format(percentBet($ref, 2), 2)*100)."%" ?></span>
@@ -157,11 +157,11 @@ if (isset($_SESSION['connect'])){
 											<div class='progress'>
 												<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0' 
 													<?php 
-													echo "style='width: ".(number_format(percentBet($ref, 3), 2)*100)."%' "; 
-													echo "aria-valuenow=".(number_format(percentBet($ref, 3), 2)*100);
+													echo "style='width: ".(percentBet($ref, 3)*100)."%' "; 
+													echo "aria-valuenow=".(percentBet($ref, 3)*100);
 													?>
 												>
-													<span><?php echo (number_format(percentBet($ref, 3), 2)*100)."%" ?></span>
+													<span><?php echo (percentBet($ref, 3)*100)."%" ?></span>
 												</div>	
 											</div>
 							            </li>

@@ -16,10 +16,15 @@ if (!isset($_POST['match_ref'])) {
 }
 if (isset($_POST['amount']) && ($_POST['amount'] > 0)) {
 	if (isset($_POST['bet_type'])) {
-		// let's go
-		
-	} else {
-			// msg "make a choice"
+		if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
+			// faut virer le bet et en remettre un et oddsEval
+		} elseif ($_POST['amount'] > remaining_credits($_SESSION['email'])) { 
+			// msg t'as pas assez de thunes
+		} else {
+			add_credits($_SESSION['email'], - $_POST['amount']);
+			addBet($_POST['match_ref'], pseudo($_SESSION['email']), $_POST['bet_type'], $_POST['amount']);
+			oddsEvaluation($_POST['match_ref']);			
+		}
 	}
 }
 
@@ -63,18 +68,17 @@ $match = match($_POST['match_ref']);
 								<div class='progress'>
 									<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
 										<?php 
-										echo "style='width: ".(number_format(percentBet($match['ref'], 1), 2)*100)."%' "; 
-										echo "aria-valuenow=".(number_format(percentBet($match['ref'], 1), 2)*100);
+										echo "style='width: ".(percentBet($match['ref'], 1)*100)."%' "; 
+										echo "aria-valuenow=".(percentBet($match['ref'], 1)*100);
 										?>
 									>
-										<span><?php echo (number_format(percentBet($match['ref'], 1), 2)*100)."%" ?></span>
+										<span><?php echo (percentBet($match['ref'], 1)*100)."%" ?></span>
 									</div>	
 								</div>
 				            </li>
 				            <li class="list-group-item  col-sm-4
 					            <?php 
-					            if (isset($_POST['bet_type'])) 
-									if ($_POST['bet_type'] == 2)
+					            if (isset($_GET['bet']) && ($_GET['bet'] == 2))
 										echo 'active';
 								?>
 				            ">
@@ -86,19 +90,18 @@ $match = match($_POST['match_ref']);
 								<div class='progress'>
 									<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
 										<?php 
-										echo "style='width: ".(number_format(percentBet($match['ref'], 2), 2)*100)."%' "; 
-										echo "aria-valuenow=".(number_format(percentBet($match['ref'], 2), 2)*100);
+										echo "style='width: ".(percentBet($match['ref'], 2)*100)."%' "; 
+										echo "aria-valuenow=".(percentBet($match['ref'], 2)*100);
 										?>
 									>
-										<span><?php echo (number_format(percentBet($match['ref'], 2), 2)*100)."%" ?></span>
+										<span><?php echo (percentBet($match['ref'], 2)*100)."%" ?></span>
 									</div>	
 								</div>
 			
 				            </li>
 				            <li class="list-group-item col-sm-4
-					            <?php 
-					            if (isset($_POST['bet_type'])) 
-									if ($_POST['bet_type'] == 1)
+								<?php 
+					            if (isset($_GET['bet']) && ($_GET['bet'] == 3))
 										echo 'active';
 								?>
 				            ">
@@ -110,11 +113,11 @@ $match = match($_POST['match_ref']);
 								<div class='progress'>
 									<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0' 
 										<?php 
-										echo "style='width: ".(number_format(percentBet($match['ref'], 3), 2)*100)."%' "; 
-										echo "aria-valuenow=".(number_format(percentBet($match['ref'], 3), 2)*100);
+										echo "style='width: ".(percentBet($match['ref'], 3)*100)."%' "; 
+										echo "aria-valuenow=".(percentBet($match['ref'], 3)*100);
 										?>
 									>
-										<span><?php echo (number_format(percentBet($match['ref'], 3), 2)*100)."%" ?></span>
+										<span><?php echo (percentBet($match['ref'], 3)*100)."%" ?></span>
 									</div>	
 								</div>
 				            </li>
@@ -146,9 +149,5 @@ $match = match($_POST['match_ref']);
 		</div>
 	</div>
 </div>
-
-
-
-
 
 <?php require("footer.php"); ?>

@@ -184,16 +184,8 @@ function match($ref){
 }
 
 // return all bets and match that user betted on
-function betsUser($email) {
+function betsUser($pseudo) {
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT `pseudo` FROM user WHERE email = ?");
-	mysqli_stmt_bind_param($stmt, 's', $email);
-	mysqli_stmt_execute($stmt);
-	$res = mysqli_stmt_get_result($stmt);
-	$assoc = mysqli_fetch_assoc($res);
-	mysqli_free_result($res);
-	$pseudo = $assoc['pseudo'];
-	
 	$stmt2 = mysqli_prepare($db_con, "SELECT * FROM `bet` INNER JOIN `match` ON `bet`.ref = `match`.ref WHERE `bet`.`pseudo` = ?");
 	mysqli_stmt_bind_param($stmt2, 's', $pseudo);
 	mysqli_stmt_execute($stmt2);
@@ -204,24 +196,68 @@ function betsUser($email) {
 	return $assoc2;
 }
 
+// return whether a user has betted on a specific match or not
+function userHasBetted($pseudo, $ref) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT IFNULL(COUNT(*),0) AS count FROM `bet` WHERE ref = ? AND pseudo = ?");
+	mysqli_stmt_bind_param($stmt, 'is', $ref, $pseudo);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	return ($assoc['count'] != 0);
+}
+
 // return the percentage of people that betted on a specific choice
 function percentBet($ref, $type) {
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT SUM(`bet_amount`) FROM `bet` WHERE `ref` = ?");
+	$stmt = mysqli_prepare($db_con, "SELECT IFNULL(SUM(`bet_amount`), 0) FROM `bet` WHERE `ref` = ?");
 	mysqli_stmt_bind_param($stmt, 'i', $ref);
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_row($res);
 	mysqli_free_result($res);
+	if ($assoc[0] == 0) {
+		$percent = 0;
+	} else {
+		$stmt2 = mysqli_prepare($db_con, "SELECT IFNULL(SUM(`bet_amount`), 0) FROM `bet` WHERE `ref` = ? AND `bet_type` = ?");
+		mysqli_stmt_bind_param($stmt2, 'ii', $ref, $type);
+		mysqli_stmt_execute($stmt2);
+		$res2 = mysqli_stmt_get_result($stmt2);
+		$assoc2 = mysqli_fetch_row($res2);
+		mysqli_free_result($res2);
+		$percent = $assoc2[0]/$assoc[0];
+	}
+	return number_format($percent, 2);
+}
+
+// Evaluate all the odds for a match
+function oddsEvaluation($ref) {
+	$ratio1 = percentBet($ref, '1');
+	$ratio2 = percentBet($ref, '2'); // draw
+	$ratio3 = percentBet($ref, '3');
 	
-	$stmt2 = mysqli_prepare($db_con, "SELECT SUM(`bet_amount`) FROM `bet` WHERE `ref` = ? AND `bet_type` = ?");
-	mysqli_stmt_bind_param($stmt2, 'ii', $ref, $type);
-	mysqli_stmt_execute($stmt2);
-	$res2 = mysqli_stmt_get_result($stmt2);
-	$assoc2 = mysqli_fetch_row($res2);
-	mysqli_free_result($res2);
-	$percent = $assoc2[0]/$assoc[0];
-	return $percent;
+	if ($ratio1 == 0) $ratio1 = '0.01';
+	if ($ratio2 == 0) $ratio2 = '0.01';
+	if ($ratio3 == 0) $ratio3 = '0.01';
+	
+	$odd1 = 1 + $GLOBALS['initialOdd']/pow(3*$ratio1, $GLOBALS['limitingFactor']);
+	$odd2 = 1 + $GLOBALS['initialOdd']/pow(3*$ratio2, $GLOBALS['limitingFactor']);
+	$odd3 = 1 + $GLOBALS['initialOdd']/pow(3*$ratio3, $GLOBALS['limitingFactor']);
+
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "UPDATE `match` SET `odds1` = ?, `draw` = ?, `odds2` = ?  WHERE `ref` = ?");
+	mysqli_stmt_bind_param($stmt, 'dddi', number_format($odd1, 2), number_format($odd2, 2), number_format($odd3, 2), $ref);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
+// add a bet
+function addBet($ref, $pseudo, $type, $amount) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "INSERT INTO `bet` (ref, pseudo, bet_type, bet_amount) VALUES (?,?,?,?)");
+	mysqli_stmt_bind_param($stmt, 'isii', $ref, $pseudo, $type, $amount);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
 }
 
 ?>

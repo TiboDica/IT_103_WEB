@@ -6,6 +6,7 @@ if (!isset($_SESSION['connect'])) {
 	exit();
 }
 if (isset($_GET['deconnecte'])) {
+	session_destroy();
 	header('Location: index.php?deconnecte');
 	exit();
 }
@@ -48,7 +49,7 @@ require("navbar_connected.php");
 </div>
 <div class='container'>
 <?php
-$bets = betsUser($_SESSION['email']);
+$bets = betsUser(pseudo($_SESSION['email']));
 foreach ($bets as $bet) { 
 ?>	
 	<div class="col-md-12">
@@ -77,11 +78,11 @@ foreach ($bets as $bet) {
 						<div class='progress'>
 							<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
 								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 1), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 1), 2)*100);
+								echo "style='width: ".(percentBet($bet['ref'], 1)*100)."%' "; 
+								echo "aria-valuenow=".(percentBet($bet['ref'], 1)*100);
 								?>
 							>
-								<span><?php echo (number_format(percentBet($bet['ref'], 1), 2)*100)."%" ?></span>
+								<span><?php echo (percentBet($bet['ref'], 1)*100)."%" ?></span>
 							</div>	
 						</div>
 		            </li>
@@ -96,11 +97,11 @@ foreach ($bets as $bet) {
 						<div class='progress'>
 							<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0'  
 								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 2), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 2), 2)*100);
+								echo "style='width: ".(percentBet($bet['ref'], 2)*100)."%' "; 
+								echo "aria-valuenow=".(percentBet($bet['ref'], 2)*100);
 								?>
 							>
-								<span><?php echo (number_format(percentBet($bet['ref'], 2), 2)*100)."%" ?></span>
+								<span><?php echo (percentBet($bet['ref'], 2)*100)."%" ?></span>
 							</div>	
 						</div>
 
@@ -116,11 +117,11 @@ foreach ($bets as $bet) {
 						<div class='progress'>
 							<div class='progress-bar progress-bar-success progress-bar-striped' aria-valuemax='100' aria-valuemin='0' 
 								<?php 
-								echo "style='width: ".(number_format(percentBet($bet['ref'], 3), 2)*100)."%' "; 
-								echo "aria-valuenow=".(number_format(percentBet($bet['ref'], 3), 2)*100);
+								echo "style='width: ".(percentBet($bet['ref'], 3)*100)."%' "; 
+								echo "aria-valuenow=".(percentBet($bet['ref'], 3)*100);
 								?>
 							>
-								<span><?php echo (number_format(percentBet($bet['ref'], 3), 2)*100)."%" ?></span>
+								<span><?php echo (percentBet($bet['ref'], 3)*100)."%" ?></span>
 							</div>	
 						</div>
 		            </li>
