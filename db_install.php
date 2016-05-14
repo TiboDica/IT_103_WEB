@@ -12,7 +12,7 @@ $qTbUser = "CREATE TABLE IF NOT EXISTS `user` (
    `zip_code` int(11) NOT NULL,
    `city` varchar(50) NOT NULL,
    `country` varchar(50) NOT NULL,
-   `credits` int(11) NOT NULL DEFAULT '0',
+   `credits` float(11) NOT NULL DEFAULT '0',
    `pwd_hash` varchar(255) NOT NULL,
    PRIMARY KEY (`pseudo`)
  ) ENGINE=InnoDB;";
@@ -25,8 +25,8 @@ $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
   `team1` varchar(25) NOT NULL,
   `team2` varchar(25) NOT NULL,
   `date` date NOT NULL,
-  `odds1` float NOT NULL,  
-  `odds2` float NOT NULL,  
+  `odds1` float(11) NOT NULL,  
+  `odds2` float(11) NOT NULL,  
   `draw` float NOT NULL,   
   PRIMARY KEY (`ref`)
 ) ENGINE=InnoDB;";

@@ -140,7 +140,7 @@ function add_credits($email, $credits) {
 	mysqli_free_result($res);
 	$stmt = mysqli_prepare($db_con, "UPDATE `user` SET `credits` = ? WHERE `email` = ?");
 	$credits = $credits + $assoc['credits'];
-	mysqli_stmt_bind_param($stmt, 'is', $credits, $email);
+	mysqli_stmt_bind_param($stmt, 'ds', $credits, $email);
 	mysqli_stmt_execute($stmt);
 	mysqli_close($db_con);
 }
