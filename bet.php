@@ -161,8 +161,16 @@ $match = match($_POST['match_ref']);
 									<option value="3"><?php echo $match['team2'] ?></option>
 								</select>           
 							</div>
-							<div class="form-group col-sm-4 col-sm-offset-4">
-								<button type="submit" class="form-control btn btn-default"> Bet </button>
+							<div class="form-group col-sm-6 col-sm-offset-4">
+								<button type="submit" class="form-control btn btn-default"> 
+									<?php 
+									if (isset($userBet)) {
+										echo "Change Bet";
+									} else {
+										echo "Bet";
+									}
+									?>
+								</button>
 							</div>
 						</form>
 						<?php if (isset($userBet)) { ?>
