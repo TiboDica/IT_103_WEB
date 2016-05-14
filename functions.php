@@ -148,7 +148,7 @@ function add_credits($email, $credits) {
 // return list of all current matchs
 function list_bets(){
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match`");
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` ORDER BY `date` ASC");
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
@@ -160,7 +160,7 @@ function list_bets(){
 // return list of current matchs
 function list_betsCat($cat){
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` WHERE `cat` = ?");
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `match` WHERE `cat` = ? ORDER BY `date` ASC");
 	mysqli_stmt_bind_param($stmt, 's', $cat);
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
@@ -186,7 +186,7 @@ function match($ref){
 // return all bets and match that user betted on
 function betsUser($pseudo) {
 	$db_con = db_con();
-	$stmt2 = mysqli_prepare($db_con, "SELECT * FROM `bet` INNER JOIN `match` ON `bet`.ref = `match`.ref WHERE `bet`.`pseudo` = ?");
+	$stmt2 = mysqli_prepare($db_con, "SELECT * FROM `bet` INNER JOIN `match` ON `bet`.ref = `match`.ref WHERE `bet`.`pseudo` = ? ORDER BY `match`.`date` ASC");
 	mysqli_stmt_bind_param($stmt2, 's', $pseudo);
 	mysqli_stmt_execute($stmt2);
 	$res2 = mysqli_stmt_get_result($stmt2);
@@ -196,7 +196,7 @@ function betsUser($pseudo) {
 	return $assoc2;
 }
 
-// return all bets and match that user betted on
+// return a specific match that user betted on
 function betUser($pseudo, $ref) {
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "SELECT * FROM `bet` WHERE `pseudo` = ? AND `ref` = ? ");
