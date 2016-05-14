@@ -16,16 +16,25 @@ if (!isset($_POST['match_ref'])) {
 }
 if (isset($_POST['amount']) && ($_POST['amount'] > 0)) {
 	if (isset($_POST['bet_type'])) {
-		if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
-			// faut virer le bet et en remettre un et oddsEval
-		} elseif ($_POST['amount'] > remaining_credits($_SESSION['email'])) { 
-			// msg t'as pas assez de thunes
+		if ($_POST['amount'] > remaining_credits($_SESSION['email'])) { 
+			$ErrorNotEnoughMoney = "You do not have enough credits to make that bet.";
 		} else {
+			if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
+				// delete previous bet
+				$prevBet = betUser(pseudo($_SESSION['email']), $_POST['match_ref']);
+				add_credits($_SESSION['email'], $prevBet['bet_amount']);
+				supprBet($_POST['match_ref'], pseudo($_SESSION['email']));
+			}
+			// add new bet
 			add_credits($_SESSION['email'], - $_POST['amount']);
 			addBet($_POST['match_ref'], pseudo($_SESSION['email']), $_POST['bet_type'], $_POST['amount']);
 			oddsEvaluation($_POST['match_ref']);			
 		}
 	}
+}
+
+if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
+	$userBet = betUser(pseudo($_SESSION['email']), $_POST['match_ref']);
 }
 
 require("boilerplate.php");
@@ -38,6 +47,10 @@ $match = match($_POST['match_ref']);
 			<h1>Hello <?php echo pseudo($_SESSION['email']) ?>!</h1>
 			<p> You have <?php echo remaining_credits($_SESSION['email']); ?> on your account</p>
 		</div>
+		<?php
+		if (isset($ErrorNotEnoughMoney))
+			echo "<div class='alert alert-danger col-sm-12' role=alert>".$ErrorNotEnoughMoney."</div>";
+		?>
 		<div>
 			<div class="col-md-12">
 				<div class="thumbnail">
@@ -56,8 +69,11 @@ $match = match($_POST['match_ref']);
 				          <ul class="list-inline">
 				            <li class="list-group-item col-sm-4
 					            <?php 
-					            if (isset($_GET['bet']) && ($_GET['bet'] == 1))
+					            if (isset($userBet) && ($userBet['bet_type'] == 1)) {
 										echo 'active';
+					            } elseif (isset($_GET['bet_type']) && ($_GET['bet_type'] == 1)) {
+										echo 'active';
+								}
 								?>
 				            ">
 								<div class='text-center'>
@@ -78,8 +94,11 @@ $match = match($_POST['match_ref']);
 				            </li>
 				            <li class="list-group-item  col-sm-4
 					            <?php 
-					            if (isset($_GET['bet']) && ($_GET['bet'] == 2))
+					            if (isset($userBet) && ($userBet['bet_type'] == 2)) {
 										echo 'active';
+					            } elseif (isset($_GET['bet_type']) && ($_GET['bet_type'] == 2)) {
+										echo 'active';
+								}
 								?>
 				            ">
 								<div class='text-center'>
@@ -100,9 +119,12 @@ $match = match($_POST['match_ref']);
 			
 				            </li>
 				            <li class="list-group-item col-sm-4
-								<?php 
-					            if (isset($_GET['bet']) && ($_GET['bet'] == 3))
+					            <?php 
+					            if (isset($userBet) && ($userBet['bet_type'] == 3)) {
 										echo 'active';
+					            } elseif (isset($_GET['bet_type']) && ($_GET['bet_type'] == 3)) {
+										echo 'active';
+								}
 								?>
 				            ">
 								<div class='text-center'>
@@ -123,7 +145,7 @@ $match = match($_POST['match_ref']);
 				            </li>
 				          </ul>
 				        </div>
-				        <form class="form-horinzontal col-sm-4 col-sm-offset-4" action="bet.php" method='post'>
+				        <form class="form-horizontal col-sm-4 col-sm-offset-4" action="bet.php" method='post'>
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="match_ref" value=<?php echo $_POST['match_ref'] ?>>
 							</div>
@@ -143,6 +165,29 @@ $match = match($_POST['match_ref']);
 								<button type="submit" class="form-control btn btn-default"> Bet </button>
 							</div>
 						</form>
+						<?php if (isset($userBet)) { ?>
+						<div class="col-sm-4">
+							<label name="Previous Bet">Your bet:</label>
+							<div>
+								<?php echo $userBet['bet_amount']." $" ?>
+							</div>
+							<div>
+								<?php
+								switch ($userBet['bet_type']) {
+									case 1:
+										echo "Victory on ".$match['team1'];
+										break;
+									case 2:
+										echo "Draw";
+										break;
+									case 3:
+										echo "Victory on ".$match['team2'];
+										break;
+								}
+								?>
+							</div>
+						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

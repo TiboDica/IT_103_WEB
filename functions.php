@@ -196,6 +196,19 @@ function betsUser($pseudo) {
 	return $assoc2;
 }
 
+// return all bets and match that user betted on
+function betUser($pseudo, $ref) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `bet` WHERE `pseudo` = ? AND `ref` = ? ");
+	mysqli_stmt_bind_param($stmt, 'si', $pseudo, $ref);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
+}
+
 // return whether a user has betted on a specific match or not
 function userHasBetted($pseudo, $ref) {
 	$db_con = db_con();
@@ -256,6 +269,15 @@ function addBet($ref, $pseudo, $type, $amount) {
 	$db_con = db_con();
 	$stmt = mysqli_prepare($db_con, "INSERT INTO `bet` (ref, pseudo, bet_type, bet_amount) VALUES (?,?,?,?)");
 	mysqli_stmt_bind_param($stmt, 'isii', $ref, $pseudo, $type, $amount);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
+// remove a bet
+function supprBet($ref, $pseudo) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "DELETE FROM `bet` WHERE `ref` = ? AND `pseudo` = ? ");
+	mysqli_stmt_bind_param($stmt, 'is', $ref, $pseudo);
 	mysqli_stmt_execute($stmt);
 	mysqli_close($db_con);
 }
