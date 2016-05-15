@@ -100,17 +100,17 @@ if (isset($_SESSION['connect'])){
 								</div>
 								<div class="row">
 									<div class="col-sm-2">
-											<form class="form-horizontal" action="bet.php" method="post">
-												<div class="form-group"> 
-													<div>
-														<input type="hidden" class="form-control" name="match_ref" value=<?php echo $ref ?>>
-													</div>
-													<div class="col-sm-6 col-sm-offset-3">
-														<button type="submit" class="btn btn-default"> Bet </button>
-													</div>
+										<form class="form-horizontal" action="bet.php" method="post">
+											<div class="form-group"> 
+												<div>
+													<input type="hidden" class="form-control" name="match_ref" value=<?php echo $ref ?>>
 												</div>
-											</form>
-										</div>
+												<div class="col-sm-6 col-sm-offset-3">
+													<button type="submit" class="btn btn-default"> Bet </button>
+												</div>
+											</div>
+										</form>
+									</div>
 							        <div class="col-sm-6 col-sm-offset-1">
 							          <ul class="list-inline">
 							            <li class="list-group-item col-sm-4">

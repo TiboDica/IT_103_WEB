@@ -103,6 +103,15 @@ function register($name, $firstname, $pseudo, $email, $street, $zip_code, $city,
 	mysqli_close($db_con);
 }
 
+// Update user informations into db
+function userUpdate($pseudo, $street, $zip_code, $city, $country) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, 'UPDATE `user` SET `street` = ?, `zip_code` = ?, `city` = ?, `country` = ? WHERE `pseudo` = ?');
+	mysqli_stmt_bind_param($stmt, 'sisss', $street, $zip_code, $city, $country, $pseudo);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
 // return pseudo of user when connected
 function pseudo($email){
 	$db_con = db_con();
@@ -114,6 +123,19 @@ function pseudo($email){
 	mysqli_free_result($res);
 	mysqli_close($db_con);
 	return $assoc['pseudo'];
+}
+
+// return user
+function user($email){
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT `name`, `firstname`, `pseudo`, `email`, `street`, `zip_code`, `city`, `country` FROM user WHERE email = ?");
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
 }
 
 // return remaining credits of user

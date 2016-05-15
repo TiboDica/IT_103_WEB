@@ -24,6 +24,16 @@ require("navbar_connected.php");
 	<div class="container">
 		<h1>Welcome <?php echo pseudo($_SESSION['email']) ?>!</h1>
 		<p><?php echo $_SESSION['email'] ?></p>
+		<form class="form-horizontal" action="register.php" method="post">
+			<div class="form-group"> 
+				<div>
+					<input type="hidden" class="form-control" name="change">
+				</div>
+				<div class="col-sm-6">
+					<button type="submit" class="btn btn-default">Change my personal informations</button>
+				</div>
+			</div>
+		</form>
 		<p> You have <?php echo remaining_credits($_SESSION['email']); ?> on your account</p>
 		<form class='form-horizontal' action="#" method='post'>
 			<div class=form-group>					
