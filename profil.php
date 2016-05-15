@@ -11,10 +11,14 @@ if (isset($_GET['deconnecte'])) {
 	exit();
 }
 if (isset($_POST['add_credits']) and ($_POST['add_credits'] > 0)) {
-	add_credits($_SESSION['email'], $_POST['add_credits']);
+	add_credits(pseudo($_SESSION['email']), $_POST['add_credits']);
 }
 if (isset($_POST['rm_credits']) and ($_POST['rm_credits'] > 0)) {
-	add_credits($_SESSION['email'], -$_POST['rm_credits']);
+	add_credits(pseudo($_SESSION['email']), -$_POST['rm_credits']);
+}
+if (isset($_POST['suppr_bet'])) {
+	supprBet($_POST['suppr_bet'], pseudo($_SESSION['email']));
+	oddsEvaluation($_POST['suppr_bet']);
 }
 	
 require("boilerplate.php");
@@ -34,7 +38,7 @@ require("navbar_connected.php");
 				</div>
 			</div>
 		</form>
-		<p> You have <?php echo remaining_credits($_SESSION['email']); ?> on your account</p>
+		<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> on your account</p>
 		<form class='form-horizontal' action="#" method='post'>
 			<div class=form-group>					
 				<div class="col-sm-2">
@@ -138,7 +142,17 @@ foreach ($bets as $bet) {
 		          </ul>
 		        </div>
 		        <div class='col-sm-3'>
-					<span>Your bet: <?php echo $bet['bet_amount']."$" ?></span>
+					<p>Your bet: <?php echo $bet['bet_amount']."$" ?></p>
+					<form class="form-horizontal" action="bet.php" method="post">
+						<div class="form-group"> 
+							<div>
+								<input type="hidden" class="form-control" name="match_ref" value=<?php echo $bet['ref'] ?>>
+							</div>
+							<div class="col-sm-6 col-sm-offset-3">
+								<button type="submit" class="btn btn-default"> Modify your bet </button>
+							</div>
+						</div>
+					</form>
 		        </div>
 			</div>
 		</div>

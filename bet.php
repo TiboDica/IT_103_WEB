@@ -10,6 +10,19 @@ if (isset($_GET['deconnecte'])) {
 	header('Location: index.php');
 	exit();
 }
+if (isset($_POST['suppr_bet'])) {
+	$userBet = betUser(pseudo($_SESSION['email']), $_POST['suppr_bet']);
+	add_credits($_SESSION['email'], $userBet['bet_amount']);
+	supprBet($_POST['suppr_bet'], pseudo($_SESSION['email']));
+	oddsEvaluation($_POST['suppr_bet']);
+	header('Location: profil.php');
+	exit();
+}
+if (isset($_POST['end_match'])) {
+	endMatch($_POST['end_match']);
+	header('Location: index.php');
+	exit();
+}
 if (!isset($_POST['match_ref'])) {
 	header('Location: index.php');
 	exit();	
@@ -45,7 +58,7 @@ $match = match($_POST['match_ref']);
 	<div class="container">
 		<div>
 			<h1>Hello <?php echo pseudo($_SESSION['email']) ?>!</h1>
-			<p> You have <?php echo remaining_credits($_SESSION['email']); ?> on your account</p>
+			<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> on your account</p>
 		</div>
 		<?php
 		if (isset($ErrorNotEnoughMoney))
@@ -146,9 +159,7 @@ $match = match($_POST['match_ref']);
 				          </ul>
 				        </div>
 				        <form class="form-horizontal col-sm-4 col-sm-offset-4" action="bet.php" method='post'>
-							<div class="form-group">
-								<input type="hidden" class="form-control" name="match_ref" value=<?php echo $_POST['match_ref'] ?>>
-							</div>
+							<input type="hidden" class="form-control" name="match_ref" value=<?php echo $_POST['match_ref'] ?>>
 							<div class="form-group">
 								<label name="How much?" class="control-label">How much do you want to bet?</label>
 								<input type="number" class="form-control" name="amount" min="0" placeholder='$' value="<?php if (isset($_POST['amount'])) echo $_POST['amount'] ?>">
@@ -195,7 +206,19 @@ $match = match($_POST['match_ref']);
 								?>
 							</div>
 						</div>
+						<form class="form-horizontal col-sm-4 col-sm-offset-4" action="bet.php" method='post'>
+							<input type="hidden" class="form-control" name="suppr_bet" value=<?php echo $_POST['match_ref'] ?>>
+							<div class="form-group col-sm-6 col-sm-offset-4">
+								<button type="submit" class="form-control btn btn-default"> Cancel Bet </button>
+							</div>
+						</form>
 						<?php } ?>
+						<form class="form-horizontal col-sm-4 col-sm-offset-4" action="bet.php" method='post'>
+							<input type="hidden" class="form-control" name="end_match" value=<?php echo $_POST['match_ref'] ?>>
+							<div class="form-group col-sm-6 col-sm-offset-4">
+								<button type="submit" class="form-control btn btn-default"> End this match </button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

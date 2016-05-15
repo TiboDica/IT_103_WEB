@@ -84,8 +84,7 @@ if (isset($_SESSION['connect'])){
 									$odds1 = $bet['odds1'];
 									$odds2 = $bet['odds2'];
 									$draw = $bet['draw'];
-					 ?>
-									
+					 ?>							
 						<div class="col-md-12">
 							<div class="thumbnail">
 								<img src="http://placehold.it/320x150" alt="">

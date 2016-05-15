@@ -139,10 +139,10 @@ function user($email){
 }
 
 // return remaining credits of user
-function remaining_credits($email){
+function remaining_credits($pseudo){
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE email = ?");
-	mysqli_stmt_bind_param($stmt, 's', $email);
+	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE pseudo = ?");
+	mysqli_stmt_bind_param($stmt, 's', $pseudo);
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_assoc($res);
@@ -152,17 +152,17 @@ function remaining_credits($email){
 }
 
 // add credits to a user
-function add_credits($email, $credits) {
+function add_credits($pseudo, $credits) {
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE email = ?");
-	mysqli_stmt_bind_param($stmt, 's', $email);
+	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE pseudo = ?");
+	mysqli_stmt_bind_param($stmt, 's', $pseudo);
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_assoc($res);
 	mysqli_free_result($res);
-	$stmt = mysqli_prepare($db_con, "UPDATE `user` SET `credits` = ? WHERE `email` = ?");
+	$stmt = mysqli_prepare($db_con, "UPDATE `user` SET `credits` = ? WHERE `pseudo` = ?");
 	$credits = $credits + $assoc['credits'];
-	mysqli_stmt_bind_param($stmt, 'ds', $credits, $email);
+	mysqli_stmt_bind_param($stmt, 'ds', $credits, $pseudo);
 	mysqli_stmt_execute($stmt);
 	mysqli_close($db_con);
 }
@@ -226,6 +226,19 @@ function betUser($pseudo, $ref) {
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$assoc = mysqli_fetch_assoc($res);
+	mysqli_free_result($res);
+	mysqli_close($db_con);
+	return $assoc;
+}
+
+// return all bet of a specific match
+function betMatch($ref) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "SELECT * FROM `bet` WHERE `ref` = ? ");
+	mysqli_stmt_bind_param($stmt, 'i', $ref);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$assoc = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	mysqli_free_result($res);
 	mysqli_close($db_con);
 	return $assoc;
@@ -304,4 +317,41 @@ function supprBet($ref, $pseudo) {
 	mysqli_close($db_con);
 }
 
+// remove a match
+function supprMatch($ref) {
+	$db_con = db_con();
+	$stmt = mysqli_prepare($db_con, "DELETE FROM `match` WHERE `ref` = ?");
+	mysqli_stmt_bind_param($stmt, 'i', $ref);
+	mysqli_stmt_execute($stmt);
+	mysqli_close($db_con);
+}
+
+// remove a bet
+function endMatch($ref) {
+	oddsEvaluation($ref);
+	$match = match($ref);
+	$bets = betMatch($ref);
+	$resType = $match['res_type'];
+	
+	switch ($resType) {
+		case 1:
+			$gainFacto =  $match['odds1'];
+			break;
+		case 2:
+			$gainFacto = $match['draw'];
+			break;
+		case 3:
+			$gainFacto = $match['odds2'];
+			break;
+	}
+	
+	foreach ($bets as $bet) {
+		if ($bet['bet_type'] == $resType) {
+			$gain = $gainFacto * $bet['bet_amount'];
+			add_credits($bet['pseudo'], $gain);
+		}
+		supprBet($ref, $bet['pseudo']);
+	}
+	supprMatch($ref);
+}
 ?>
