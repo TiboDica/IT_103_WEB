@@ -2,11 +2,14 @@
 require("functions.php");
 session_start();
 
+add_credits($_SESSION['email'], 5.5);
+
 if (!isset($_SESSION['connect'])) {
 	header('Location: sign_in.php');
 	exit();
 }
 if (isset($_GET['deconnecte'])) {
+	session_destroy();
 	header('Location: index.php');
 	exit();
 }
@@ -20,7 +23,7 @@ if (isset($_POST['suppr_bet'])) {
 }
 if (isset($_POST['end_match'])) {
 	endMatch($_POST['end_match']);
-	header('Location: index.php');
+	header('Location: profil.php');
 	exit();
 }
 if (!isset($_POST['match_ref'])) {
@@ -29,7 +32,7 @@ if (!isset($_POST['match_ref'])) {
 }
 if (isset($_POST['amount']) && ($_POST['amount'] > 0)) {
 	if (isset($_POST['bet_type'])) {
-		if ($_POST['amount'] > remaining_credits($_SESSION['email'])) { 
+		if ($_POST['amount'] >= remaining_credits(pseudo($_SESSION['email']))) { 
 			$ErrorNotEnoughMoney = "You do not have enough credits to make that bet.";
 		} else {
 			if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
@@ -58,7 +61,7 @@ $match = match($_POST['match_ref']);
 	<div class="container">
 		<div>
 			<h1>Hello <?php echo pseudo($_SESSION['email']) ?>!</h1>
-			<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> on your account</p>
+			<p> You have <?php echo number_format(remaining_credits(pseudo($_SESSION['email'])), 2); ?> $ on your account</p>
 		</div>
 		<?php
 		if (isset($ErrorNotEnoughMoney))
@@ -175,11 +178,8 @@ $match = match($_POST['match_ref']);
 							<div class="form-group col-sm-6 col-sm-offset-4">
 								<button type="submit" class="form-control btn btn-default"> 
 									<?php 
-									if (isset($userBet)) {
-										echo "Change Bet";
-									} else {
-										echo "Bet";
-									}
+									if (isset($userBet)) echo "Change Bet"; 
+									else echo "Bet"; 
 									?>
 								</button>
 							</div>

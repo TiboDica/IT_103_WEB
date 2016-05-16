@@ -38,7 +38,7 @@ require("navbar_connected.php");
 				</div>
 			</div>
 		</form>
-		<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> $ on your account</p>
+		<p> You have <?php echo number_format(remaining_credits(pseudo($_SESSION['email'])), 2); ?> $ on your account</p>
 		<form class='form-horizontal' action="#" method='post'>
 			<div class=form-group>					
 				<div class="col-sm-2">

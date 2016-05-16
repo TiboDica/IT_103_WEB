@@ -141,7 +141,7 @@ function user($email){
 // return remaining credits of user
 function remaining_credits($pseudo){
 	$db_con = db_con();
-	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM user WHERE pseudo = ?");
+	$stmt = mysqli_prepare($db_con, "SELECT `credits` FROM `user` WHERE `pseudo` = ?");
 	mysqli_stmt_bind_param($stmt, 's', $pseudo);
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);

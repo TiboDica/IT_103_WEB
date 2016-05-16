@@ -31,7 +31,7 @@
                         <a href='?deconnecte='>Sign out</a>
                     </li>
                 </ul>
-                <p class="navbar-text navbar-right"><?php echo pseudo($_SESSION['email'])." (".remaining_credits(pseudo($_SESSION['email']))." $)"?></p>
+                <p class="navbar-text navbar-right"><?php echo pseudo($_SESSION['email'])." (".number_format(remaining_credits(pseudo($_SESSION['email'])), 2)." $)"?></p>
             </div>
             <!-- /.navbar-collapse -->
         </div>
