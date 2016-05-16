@@ -7,59 +7,59 @@ $insert2 = 'insert into `user` (name, firstname, pseudo, email, street, zip_code
 
 // MATCH
 // foot
-$insert3 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("football", "Football", "Barcelona", "Real Madrid", "2016-08-20", "1", "1", "1");';
-$insert4 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("football", "Football", "PSG", "Manchester United", "2016-09-12", "1", "1", "1");';
-$insert5 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("football", "Football", "AC Milan", "PSG", "2016-08-19", "1", "1", "1");';
-$insert6 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("football", "Football", "Nantes", "Chelsea", "2016-09-20", "1", "1", "1");';
+$insert3 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("football", "Football", "Barcelona", "Real Madrid", "2016-08-20", "1", "1", "1", "3");';
+$insert4 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("football", "Football", "PSG", "Manchester United", "2016-09-12", "1", "1", "1", "1");';
+$insert5 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("football", "Football", "AC Milan", "PSG", "2016-08-19", "1", "1", "1", "2");';
+$insert6 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("football", "Football", "Nantes", "Chelsea", "2016-09-20", "1", "1", "1", "3");';
 // esport
-$insert7 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "Starcraft 2", "Jaedong", "MMA", "2016-06-14", "1", "1", "1");';
-$insert8 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "Starcraft 2", "Invasion Esport", "yoe Flash Wolves", "2016-07-15", "1", "1", "1");';
-$insert9 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "Starcraft 2", "EURONICS Gaming", "Ting", "2016-07-02", "1", "1", "1");';
-$insert10 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "League of Legends", "SKT T1", "Fnatic", "2016-09-08", "1", "1", "1");';
-$insert11 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "League of Legends", "LDG", "KOO Tigers", "2016-07-07", "1", "1", "1");';
-$insert12 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("e-sport", "League of Legends", "KOO Tigers", "Origen", "2016-07-06", "1", "1", "1");';
+$insert7 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "Starcraft 2", "Jaedong", "MMA", "2016-06-14", "1", "1", "1", "1");';
+$insert8 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "Starcraft 2", "Invasion Esport", "yoe Flash Wolves", "2016-07-15", "1", "1", "1", "3");';
+$insert9 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "Starcraft 2", "EURONICS Gaming", "Ting", "2016-07-02", "1", "1", "1", "2");';
+$insert10 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "League of Legends", "SKT T1", "Fnatic", "2016-09-08", "1", "1", "1", "3");';
+$insert11 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "League of Legends", "LDG", "KOO Tigers", "2016-07-07", "1", "1", "1", "1");';
+$insert12 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("e-sport", "League of Legends", "KOO Tigers", "Origen", "2016-07-06", "1", "1", "1", "1");';
 // tennis
-$insert13 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("tennis", "Tennis", "Novak Djokovic", "Kei Nishikori", "2016-06-14", "1", "1", "1");';
-$insert14 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("tennis", "Tennis", "Lucas Pouille", "Andy Murray", "2016-07-12", "1", "1", "1");';
-$insert15 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("tennis", "Tennis", "Serena Williams", "Irina-Camelia Begu", "2016-08-04", "1", "1", "1");';
-$insert16 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("tennis", "Tennis", "Rodger Federer", "Raphael Nadal", "2016-08-04", "1", "1", "1");';
+$insert13 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("tennis", "Tennis", "Novak Djokovic", "Kei Nishikori", "2016-06-14", "1", "1", "1", "1");';
+$insert14 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("tennis", "Tennis", "Lucas Pouille", "Andy Murray", "2016-07-12", "1", "1", "1", "3");';
+$insert15 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("tennis", "Tennis", "Serena Williams", "Irina-Camelia Begu", "2016-08-04", "1", "1", "1", "2");';
+$insert16 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("tennis", "Tennis", "Rodger Federer", "Raphael Nadal", "2016-08-04", "1", "1", "1", "1");';
 // basktball
-$insert17 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("basketball", "Basketball", "Golden State Warr.", "Houston Rockets", "2016-09-29", "1", "1", "1");';
-$insert18 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("basketball", "Basketball", "Toronto Raptors", "Indiana Pacers", "2016-09-28", "1", "1", "1");';
-$insert19 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("basketball", "Basketball", "Cleveland Cavalie.", "Detroit Pistons", "2016-07-02", "1", "1", "1");';
+$insert17 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("basketball", "Basketball", "Golden State Warr.", "Houston Rockets", "2016-09-29", "1", "1", "1", "3");';
+$insert18 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("basketball", "Basketball", "Toronto Raptors", "Indiana Pacers", "2016-09-28", "1", "1", "1", "2");';
+$insert19 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("basketball", "Basketball", "Cleveland Cavalie.", "Detroit Pistons", "2016-07-02", "1", "1", "1", "1");';
 // rugby
-$insert20 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("rugby", "Rugby", "Racing 92", "Saracens", "2016-06-20", "1", "1", "1");';
-$insert21 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("rugby", "Rugby", "Bordeaux-Begles", "Toulouse", "2016-06-27", "1", "1", "1");';
-$insert22 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("rugby", "Rugby", "Agen", "Oyonnax", "2016-07-12", "1", "1", "1");';
-$insert23 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("rugby", "Rugby", "Toulon", "La Rochelle", "2016-08-03", "1", "1", "1");';
+$insert20 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("rugby", "Rugby", "Racing 92", "Saracens", "2016-06-20", "1", "1", "1", "3");';
+$insert21 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("rugby", "Rugby", "Bordeaux-Begles", "Toulouse", "2016-06-27", "1", "1", "1", "3");';
+$insert22 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("rugby", "Rugby", "Agen", "Oyonnax", "2016-07-12", "1", "1", "1", "1");';
+$insert23 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("rugby", "Rugby", "Toulon", "La Rochelle", "2016-08-03", "1", "1", "1", "1");';
 // handball
-$insert24 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("handball", "Handball", "Chartres", "Tours", "2016-09-23", "1", "1", "1");';
-$insert25 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("handball", "Handball", "Ivry", "Tremblay", "2016-09-17", "1", "1", "1");';
-$insert26 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("handball", "Handball", "Dunkerque", "Aix", "2016-09-17", "1", "1", "1");';
-$insert27 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("handball", "Handball", "Nantes", "Montpellier", "2016-09-17", "1", "1", "1");';
+$insert24 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("handball", "Handball", "Chartres", "Tours", "2016-09-23", "1", "1", "1", "1");';
+$insert25 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("handball", "Handball", "Ivry", "Tremblay", "2016-09-17", "1", "1", "1", "2");';
+$insert26 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("handball", "Handball", "Dunkerque", "Aix", "2016-09-17", "1", "1", "1", "3");';
+$insert27 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("handball", "Handball", "Nantes", "Montpellier", "2016-09-17", "1", "1", "1", "1");';
 // Ice hockey
-$insert28 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("ice-hockey", "Ice Hockey", "St. Louis Blues", "San Jose Sharks", "2016-09-02", "1", "1", "1");';
-$insert29 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("ice-hockey", "Ice Hockey", "Tampa Bay Lightning", "Pittsburgh Penguins", "2016-09-15", "1", "1", "1");';
-$insert30 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("ice-hockey", "Ice Hockey", "Buffalo Sabres", "Nashville Predators", "2016-09-15", "1", "1", "1");';
-$insert31 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("ice-hockey", "Ice Hockey", "Vancouver Canucks", "Ottawa Senators", "2016-08-23", "1", "1", "1");';
+$insert28 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("ice-hockey", "Ice Hockey", "St. Louis Blues", "San Jose Sharks", "2016-09-02", "1", "1", "1", "2");';
+$insert29 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("ice-hockey", "Ice Hockey", "Tampa Bay Lightning", "Pittsburgh Penguins", "2016-09-15", "1", "1", "1", "2");';
+$insert30 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("ice-hockey", "Ice Hockey", "Buffalo Sabres", "Nashville Predators", "2016-09-15", "1", "1", "1", "1");';
+$insert31 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("ice-hockey", "Ice Hockey", "Vancouver Canucks", "Ottawa Senators", "2016-08-23", "1", "1", "1", "2");';
 // volley ball
-$insert32 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("volley-ball", "Volley-Ball", "AS Cannes", "Narbonne", "2016-08-18", "1", "1", "1");';
-$insert33 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("volley-ball", "Volley-Ball", "Poitiers", "Montpellier", "2016-09-08", "1", "1", "1");';
-$insert34 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("volley-ball", "Volley-Ball", "Paris", "Nantes-Reze", "2016-07-24", "1", "1", "1");';
-$insert35 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("volley-ball", "Volley-Ball", "Sete", "Ajaccio", "2016-08-19", "1", "1", "1");';
-$insert36 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("volley-ball", "Volley-Ball", "Lyon", "Toulouse", "2016-09-27", "1", "1", "1");';
+$insert32 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("volley-ball", "Volley-Ball", "AS Cannes", "Narbonne", "2016-08-18", "1", "1", "1", "3");';
+$insert33 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("volley-ball", "Volley-Ball", "Poitiers", "Montpellier", "2016-09-08", "1", "1", "1", "2");';
+$insert34 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("volley-ball", "Volley-Ball", "Paris", "Nantes-Reze", "2016-07-24", "1", "1", "1", "3");';
+$insert35 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("volley-ball", "Volley-Ball", "Sete", "Ajaccio", "2016-08-19", "1", "1", "1", "2");';
+$insert36 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("volley-ball", "Volley-Ball", "Lyon", "Toulouse", "2016-09-27", "1", "1", "1", "1");';
 // baseball
-$insert37 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("baseball", "Baseball", "Baltimore Orioles", "Chicago Cubs", "2016-08-13", "1", "1", "1");';
-$insert38 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("baseball", "Baseball", "Chicago White Sox", "Boston Red Sox", "2016-09-22", "1", "1", "1");';
-$insert39 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("baseball", "Baseball", "Los Angeles Angels", "Minnesota Twins", "2016-09-16", "1", "1", "1");';
-$insert40 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("baseball", "Baseball", "Oakland Athletics", "Pittsburgh Pirates", "2016-10-05", "1", "1", "1");';
+$insert37 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("baseball", "Baseball", "Baltimore Orioles", "Chicago Cubs", "2016-08-13", "1", "1", "1", "1");';
+$insert38 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("baseball", "Baseball", "Chicago White Sox", "Boston Red Sox", "2016-09-22", "1", "1", "1", "2");';
+$insert39 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("baseball", "Baseball", "Los Angeles Angels", "Minnesota Twins", "2016-09-16", "1", "1", "1", "3");';
+$insert40 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("baseball", "Baseball", "Oakland Athletics", "Pittsburgh Pirates", "2016-10-05", "1", "1", "1", "1");';
 // fighting sport
-$insert41 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Boxing", "Tyson Fury", "Mayweather", "2016-07-03", "1", "1", "1");';
-$insert42 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Boxing", "Sugar Ray", "Djelkhir", "2016-08-28", "1", "1", "1");';
-$insert43 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Boxing", "Alvarez", "DeGale", "2016-07-25", "1", "1", "1");';
-$insert44 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Judo", "Pinot", "Gahie", "2016-06-24", "1", "1", "1");';
-$insert45 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Judo", "Le Blouch", "Riner", "2016-07-16", "1", "1", "1");';
-$insert46 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw) values ("fighting-sport", "Judo", "Clerge", "Andeol", "2016-08-12", "1", "1", "1");';
+$insert41 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Boxing", "Tyson Fury", "Mayweather", "2016-07-03", "1", "1", "1", "2");';
+$insert42 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Boxing", "Sugar Ray", "Djelkhir", "2016-08-28", "1", "1", "1", "1");';
+$insert43 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Boxing", "Alvarez", "DeGale", "2016-07-25", "1", "1", "1", "1");';
+$insert44 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Judo", "Pinot", "Gahie", "2016-06-24", "1", "1", "1", "2");';
+$insert45 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Judo", "Le Blouch", "Riner", "2016-07-16", "1", "1", "1", "3");';
+$insert46 = 'insert into `match` (cat, sport, team1, team2, date, odds1, odds2, draw, res_type) values ("fighting-sport", "Judo", "Clerge", "Andeol", "2016-08-12", "1", "1", "1", "2");';
 
 // BET
 $insert47 = 'insert into `bet` values ("1", "kirimati", "3", "10");';

@@ -38,7 +38,7 @@ require("navbar_connected.php");
 				</div>
 			</div>
 		</form>
-		<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> on your account</p>
+		<p> You have <?php echo remaining_credits(pseudo($_SESSION['email'])); ?> $ on your account</p>
 		<form class='form-horizontal' action="#" method='post'>
 			<div class=form-group>					
 				<div class="col-sm-2">
@@ -149,7 +149,7 @@ foreach ($bets as $bet) {
 								<input type="hidden" class="form-control" name="match_ref" value=<?php echo $bet['ref'] ?>>
 							</div>
 							<div class="col-sm-6 col-sm-offset-3">
-								<button type="submit" class="btn btn-default"> Modify your bet </button>
+								<button type="submit" class="btn btn-default"> Modify my bet </button>
 							</div>
 						</div>
 					</form>

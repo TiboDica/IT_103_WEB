@@ -1,10 +1,6 @@
 <?php
 require("functions.php");
 session_start();
-if (isset($_GET['cat'])) {
-	// blablablablablabla !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// si on veut ne pqs faire du GET on peut stocker dans SESSION et header.... a voir
-}
 if (isset($_GET['deconnecte'])) {
 	session_destroy();
 	header('Location: index.php');

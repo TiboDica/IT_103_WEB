@@ -23,17 +23,15 @@
                         <a href="#">Contact</a>
                     </li>
                 </ul>
-								<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="profil.php">My profil</a>
-                    </li>
-                    <li>
-                        <a href="#">Account parameters</a>
                     </li>
                     <li>
                         <a href='?deconnecte='>Sign out</a>
                     </li>
                 </ul>
+                <p class="navbar-text navbar-right"><?php echo pseudo($_SESSION['email'])." (".remaining_credits(pseudo($_SESSION['email']))." $)"?></p>
             </div>
             <!-- /.navbar-collapse -->
         </div>

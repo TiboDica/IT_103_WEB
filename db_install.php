@@ -27,7 +27,8 @@ $qTbMatch = "CREATE TABLE IF NOT EXISTS `match` (
   `date` date NOT NULL,
   `odds1` float(11) NOT NULL,  
   `odds2` float(11) NOT NULL,  
-  `draw` float NOT NULL,   
+  `draw` float NOT NULL, 
+  `res_type` int(11) NOT NULL,
   PRIMARY KEY (`ref`)
 ) ENGINE=InnoDB;";
 
