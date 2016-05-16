@@ -38,11 +38,11 @@ if (isset($_POST['amount']) && ($_POST['amount'] > 0)) {
 			if (userHasBetted(pseudo($_SESSION['email']), $_POST['match_ref'])) {
 				// delete previous bet
 				$prevBet = betUser(pseudo($_SESSION['email']), $_POST['match_ref']);
-				add_credits($_SESSION['email'], $prevBet['bet_amount']);
+				add_credits(pseudo($_SESSION['email']), $prevBet['bet_amount']);
 				supprBet($_POST['match_ref'], pseudo($_SESSION['email']));
 			}
 			// add new bet
-			add_credits($_SESSION['email'], - $_POST['amount']);
+			add_credits(pseudo($_SESSION['email']), - $_POST['amount']);
 			addBet($_POST['match_ref'], pseudo($_SESSION['email']), $_POST['bet_type'], $_POST['amount']);
 			oddsEvaluation($_POST['match_ref']);			
 		}
