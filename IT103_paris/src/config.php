@@ -7,7 +7,7 @@ $GLOBALS['dbPass'] = 'root';
 $GLOBALS['dbName'] = 'online_bet';
 
 // Site configuration
-$GLOBALS['siteTitle'] = 'Online Bet 3000';
+$GLOBALS['siteTitle'] = 'EZ Money 3000 - Online Bet Corporation';
 
 // Bet configuration
 $GLOBALS['initialOdd'] = '1';

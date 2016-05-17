@@ -1,0 +1,27 @@
+DESCRIPTION
+
+- src/bet.php : gere un pari: l'ajout/ l'annulation/ la fin d'un pari.
+
+- src/boilerplate.php : gere l'entete de toutes nos pages.
+
+- src/config.php : definition des variables globales du site (titre, nom et mot de passe de la DB, cotes initiales, etc).
+
+- src/footer.php : complementaire a boilerplate.php : bas de page commun a toutes nos pages.
+
+- src/functions.php : regroupe toutes le fonctions utiles (par exemple : pour la gestion de la DB)
+
+- src/index.php : page principale du site, affiche tous les matchs en cours.
+
+- src/navbar_connected.php : barre de navigation a inclure dans les pages, specifique a un utilisateur connecte.
+
+- src/navbar_unconnected.php : barre de navigation a inclure dans les pages, lorsque le visiteur n'est pas connecte.
+
+- src/profil.php : permet à un utilisateur de visualiser les paris en cours et de rajouter du credit sur son compte.
+
+- src/register.php : permet a un utilisateur de s'inscrire, ou a un utilisateur connecte de modifier ses informations personnelles.
+
+- src/sign_in.php : permet a un utilisateur de s'identifier sur le site.
+
+- src/bootstrap.min.css : framework Bootstrap.
+
+- src/style.css : modifications personelles du CSS.
